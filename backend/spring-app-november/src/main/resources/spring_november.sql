@@ -11,4 +11,7 @@ CREATE TABLE users (
     UNIQUE KEY unique_email (email)
 );
 
+INSERT INTO users (username, password, email) VALUES ('u1', 'p1', 'alice@example.com');
+INSERT INTO users (username, password, email) VALUES ('u2', 'p2', 'bob@example.net');
+INSERT INTO users (username, password, email) VALUES ('u3', 'p3', 'charlie@example.org');
 commit;
