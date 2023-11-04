@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
     public UserDto updateUser(Long id, UserDto userDto) {
         User user = userRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("User not found"));
+        userDto.setId(id);
         BeanUtils.copyProperties(userDto, user);
         user = userRepository.save(user);
         BeanUtils.copyProperties(user, userDto);
