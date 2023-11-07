@@ -1,6 +1,7 @@
 package com.spring.springappnovember.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.spring.springappnovember.dtos.UserDto;
 import com.spring.springappnovember.services.UserService;
+import com.spring.springappnovember.utility.JwtUtil;
 
 @RestController
 @RequestMapping("/users")
@@ -46,4 +48,15 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.ok().build();
     }
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody UserDto userDTO) {
+    	System.out.println("UserController /users/login endpoint Triggered");
+    	UserDto authenticatedUserDTO = userService.authenticate(userDTO.getUsername(), userDTO.getPassword());
+        if (authenticatedUserDTO != null) {
+            String token = JwtUtil.generateToken(userDTO.getUsername());
+            return ResponseEntity.ok(Map.of("token", token));  // Return as JSON
+        }
+        return ResponseEntity.badRequest().body("Invalid username or password");
+    }
+    
 }

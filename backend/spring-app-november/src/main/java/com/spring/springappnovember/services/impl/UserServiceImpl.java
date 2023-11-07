@@ -64,4 +64,11 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+    @Override
+    public UserDto authenticate(String username, String password) {
+            UserDto userDTO = new UserDto();
+            userDTO.setUsername(username);
+            userDTO.setPassword(password);
+            return userDTO;
+    }
 }
