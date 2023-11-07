@@ -35,9 +35,9 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 	    final String authorizationHeader = request.getHeader("Authorization");
 
 	    if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-	    	System.out.println("in JWTAuthenticationFilter , Check for token in Authorization header");
 	        jwt = authorizationHeader.substring(7);
-	        username = "hello";
+	        username = JwtUtil.getUsernameFromToken(jwt);
+	    	System.out.println("in JWTAuthenticationFilter , Check for token in Authorization header"+username);
 	    }
 
 	    // If token was not in header, look in cookies
