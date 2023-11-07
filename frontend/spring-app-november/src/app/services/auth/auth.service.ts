@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { User } from 'src/app/models/user-dto.model';
 
 @Injectable({
@@ -17,12 +17,18 @@ export class AuthService {
   ) {}
 
   login(username: string, password: string) {
-    if (username === 'user' && password === 'pass') {
-      console.log('Logged in!');
-      this.router.navigate(['/landing']);
-    } else {
-      console.error('Login failed');
-    }
+    return this.http
+      .post<any>(`${this.apiUrl}/users/login`, { username, password })
+      .pipe(
+        map((response) => {
+          this.cookieService.set('token', response.token);
+          return response;
+        }),
+        catchError((error) => {
+          console.error('Login failed', error);
+          return throwError(error);
+        })
+      );
   }
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiUrl}/users`);

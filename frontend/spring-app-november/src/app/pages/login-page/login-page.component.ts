@@ -14,14 +14,14 @@ export class LoginPageComponent {
   constructor(private authService: AuthService) {}
 
   onSubmit() {
-    this.authService.getAllUsers().subscribe(
-      (data: User[]) => {
-        console.log(data);
+    this.authService.login(this.username, this.password).subscribe(
+      (data) => {
+        console.log('Logged in!', data);
+        // Redirect to landing page or perform other actions after successful login
       },
       (error) => {
-        console.error(error);
+        console.error('Login error', error);
       }
     );
-    this.authService.login(this.username, this.password);
   }
 }
