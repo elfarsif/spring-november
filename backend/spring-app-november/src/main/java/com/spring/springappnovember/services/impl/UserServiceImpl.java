@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
-
+	@Autowired
     private final UserRepository userRepository;
 
     @Autowired
@@ -66,9 +66,13 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public UserDto authenticate(String username, String password) {
-            UserDto userDTO = new UserDto();
-            userDTO.setUsername(username);
-            userDTO.setPassword(password);
+    	User user = userRepository.findByUsername(username);
+    	System.out.println("UserServiceImpl.authenticate "+user);
+    	if (user != null && password.equals(user.getPassword())) { 
+    		UserDto userDTO = new UserDto();
+            BeanUtils.copyProperties(user, userDTO);
             return userDTO;
+        }
+    	return null;
     }
 }
