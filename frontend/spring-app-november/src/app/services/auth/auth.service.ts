@@ -30,7 +30,13 @@ export class AuthService {
         })
       );
   }
-  getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/users`);
+
+  logout() {
+    this.cookieService.delete('token');
+    this.router.navigate(['/login']); // Assuming '/login' is your login route
+  }
+
+  isLoggedIn(): boolean {
+    return this.cookieService.check('token');
   }
 }

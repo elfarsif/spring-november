@@ -42,6 +42,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
 	    // If token was not in header, look in cookies
 	    if (jwt == null) {  // Debug statement
+	    	
 	        Cookie[] cookies = request.getCookies();
 	    	
 	        if (cookies != null) {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user-dto.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
@@ -11,13 +12,13 @@ export class LoginPageComponent {
   username!: string;
   password!: string;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit() {
     this.authService.login(this.username, this.password).subscribe(
       (data) => {
         console.log('Logged in!', data);
-        // Redirect to landing page or perform other actions after successful login
+        this.router.navigate(['/landing']);
       },
       (error) => {
         console.error('Login error', error);
