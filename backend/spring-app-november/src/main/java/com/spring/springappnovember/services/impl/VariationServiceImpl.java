@@ -1,7 +1,9 @@
 package com.spring.springappnovember.services.impl;
 
 
+import com.spring.springappnovember.dtos.RecipeDto;
 import com.spring.springappnovember.dtos.VariationDto;
+import com.spring.springappnovember.entities.Recipe;
 import com.spring.springappnovember.entities.Variation;
 import com.spring.springappnovember.repositories.VariationRepository;
 import com.spring.springappnovember.services.VariationService;
@@ -68,5 +70,6 @@ public class VariationServiceImpl implements VariationService {
         BeanUtils.copyProperties(variation, variationDto);
         return variationDto;
     }
+
 }
 

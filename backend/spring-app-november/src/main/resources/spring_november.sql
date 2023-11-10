@@ -13,7 +13,7 @@ CREATE TABLE users (
 
 -- Recipe Table
 CREATE TABLE recipes (
-    recipe_id INT AUTO_INCREMENT PRIMARY KEY,
+    recipe_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT,
     title VARCHAR(255) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
@@ -21,7 +21,7 @@ CREATE TABLE recipes (
 
 CREATE TABLE variations (
     variation_id INT AUTO_INCREMENT PRIMARY KEY,
-    recipe_id INT NOT NULL,
+    recipe_id BIGINT NOT NULL,
     variation_title VARCHAR(255) NOT NULL,
     instructions TEXT NOT NULL,  -- Large text for detailed instructions
     FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id)

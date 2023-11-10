@@ -7,9 +7,10 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RecipeListComponent } from './components/recipe-list/recipe-list.component';
+import { VariationPageComponent } from './pages/variation-page/variation-page.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, LandingPageComponent, RecipeListComponent],
+  declarations: [AppComponent, LoginPageComponent, LandingPageComponent, RecipeListComponent, VariationPageComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
