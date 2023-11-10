@@ -23,4 +23,24 @@ export class VariationService {
       headers,
     });
   }
+
+  postNewVariation(variationTitle: string, recipeId: number, userId: number) {
+    const token = this.cookieService.get('token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    const payload = {
+      variationTitle: variationTitle,
+      instructions: '',
+      recipe: {
+        recipeId: recipeId,
+        user: {
+          id: userId,
+        },
+      },
+    };
+    return this.http.post<VariationDTO>(`${this.apiUrl}`, payload, { headers });
+  }
 }

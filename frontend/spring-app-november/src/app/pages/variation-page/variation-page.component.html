@@ -2,13 +2,25 @@
   <h2>My Variations</h2>
   <ul>
     <li *ngFor="let variation of variations">
-      <a (click)="onSelectVariation(variation)">
+      <button (click)="onSelectVariation(variation)">
         {{ variation.variationTitle }}
-      </a>
+      </button>
+    </li>
+    <li>
+      <button (click)="openPopup()">New Variation</button>
     </li>
   </ul>
 </div>
 <div *ngIf="selectedVariation">
   <h3>Instructions</h3>
   <p>{{ selectedVariation.instructions }}</p>
+</div>
+<!-- Modal for new variation -->
+<div *ngIf="showModal" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="closePopup()">&times;</span>
+    <p>Enter New Variation Title:</p>
+    <input type="text" [(ngModel)]="newVariationTitle" />
+    <button (click)="submitNewVariation()">Submit</button>
+  </div>
 </div>
