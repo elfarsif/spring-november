@@ -21,7 +21,22 @@ public class RecipeServiceImpl implements RecipeService {
     public RecipeServiceImpl(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
     }
-
+    
+    @Override
+    public List<RecipeDto> getRecipesByUserId(Long userId) {
+        List<Recipe> recipes = recipeRepository.findAllByUserId(userId);
+        return recipes.stream()
+                .map(this::convertEntityToDto)
+                .collect(Collectors.toList());
+    }
+	@Override
+    public List<RecipeDto> findRecipesByUsername(String username) {
+		List<Recipe> recipes = recipeRepository.findRecipesByUser_Username(username);
+        return recipes.stream()
+                .map(this::convertEntityToDto)
+                .collect(Collectors.toList());
+    }
+    
     @Override
     public RecipeDto createRecipe(RecipeDto recipeDto) {
         Recipe recipe = new Recipe();
