@@ -12,14 +12,14 @@ export class VariationService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
-  getAllVariations(): Observable<VariationDTO[]> {
+  getVariationsByRecipeId(recipeId: number): Observable<VariationDTO[]> {
     const token = this.cookieService.get('token');
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
 
-    return this.http.get<VariationDTO[]>(`${this.apiUrl}`, {
+    return this.http.get<VariationDTO[]>(`${this.apiUrl}/recipe/${recipeId}`, {
       headers,
     });
   }

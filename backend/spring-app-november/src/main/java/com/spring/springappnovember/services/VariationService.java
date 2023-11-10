@@ -11,5 +11,6 @@ public interface VariationService {
  VariationDto getVariationById(Integer id);
  VariationDto updateVariation(Integer id, VariationDto variationDto);
  void deleteVariation(Integer id);
+List<VariationDto> getVariationsByRecipeId(Long recipeId);
 }
 

@@ -13,7 +13,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'variations',
+    path: 'variations/:id',
     component: VariationPageComponent,
     canActivate: [AuthGuard],
   },

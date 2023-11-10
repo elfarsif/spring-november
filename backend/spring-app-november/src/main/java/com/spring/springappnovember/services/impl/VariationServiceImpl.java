@@ -57,6 +57,13 @@ public class VariationServiceImpl implements VariationService {
         BeanUtils.copyProperties(existingVariation, variationDto);
         return variationDto;
     }
+    @Override
+    public List<VariationDto> getVariationsByRecipeId(Long recipeId) {
+        List<Variation> variations = variationRepository.findByRecipeRecipeId(recipeId);
+        return variations.stream()
+                .map(this::convertEntityToDto)
+                .collect(Collectors.toList());
+    }
 
     @Override
     public void deleteVariation(Integer id) {

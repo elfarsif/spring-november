@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { VariationDTO } from 'src/app/models/variation-dto.model';
 import { VariationService } from 'src/app/services/variation/variation.service';
 
 @Component({
@@ -7,12 +9,21 @@ import { VariationService } from 'src/app/services/variation/variation.service';
   styleUrls: ['./variation-page.component.css'],
 })
 export class VariationPageComponent {
-  constructor(private variationService: VariationService) {}
+  variations!: VariationDTO[];
+  recipeId!: number;
+  constructor(
+    private variationService: VariationService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
   ngOnInit() {
-    console.log('get variation for username');
-    this.variationService.getAllVariations().subscribe(
+    this.route.params.subscribe((params) => {
+      this.recipeId = +params['id'];
+    });
+    this.variationService.getVariationsByRecipeId(this.recipeId).subscribe(
       (data) => {
-        console.log(data);
+        this.variations = data;
+        console.log(this.variations);
       },
       (error) => {}
     );

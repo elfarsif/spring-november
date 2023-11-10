@@ -2,7 +2,7 @@
   <h2>My Recipes</h2>
   <ul>
     <li *ngFor="let recipe of recipes">
-      <a [routerLink]="['/variations']">
+      <a [routerLink]="['/variations', recipe.recipeId]">
         {{ recipe.title }}
       </a>
     </li>

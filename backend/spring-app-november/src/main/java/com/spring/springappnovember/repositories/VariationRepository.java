@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VariationRepository extends JpaRepository<Variation, Integer> {
+
+    List<Variation> findByRecipeRecipeId(Long recipeId);
 }

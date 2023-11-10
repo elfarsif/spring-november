@@ -47,4 +47,10 @@ public class VariationController {
         variationService.deleteVariation(id);
         return ResponseEntity.ok().build();
     }
+    
+    @GetMapping("/recipe/{recipeId}")
+    public ResponseEntity<List<VariationDto>> getRecipesByUserId(@PathVariable Long recipeId) {
+        List<VariationDto> variations = variationService.getVariationsByRecipeId(recipeId);
+        return ResponseEntity.ok(variations);
+    }
 }
