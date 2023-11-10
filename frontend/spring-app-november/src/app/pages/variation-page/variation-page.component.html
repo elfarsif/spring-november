@@ -2,9 +2,13 @@
   <h2>My Variations</h2>
   <ul>
     <li *ngFor="let variation of variations">
-      <a>
+      <a (click)="onSelectVariation(variation)">
         {{ variation.variationTitle }}
       </a>
     </li>
   </ul>
+</div>
+<div *ngIf="selectedVariation">
+  <h3>Instructions</h3>
+  <p>{{ selectedVariation.instructions }}</p>
 </div>

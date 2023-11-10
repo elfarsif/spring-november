@@ -11,6 +11,7 @@ import { VariationService } from 'src/app/services/variation/variation.service';
 export class VariationPageComponent {
   variations!: VariationDTO[];
   recipeId!: number;
+  selectedVariation?: VariationDTO;
   constructor(
     private variationService: VariationService,
     private route: ActivatedRoute,
@@ -27,5 +28,8 @@ export class VariationPageComponent {
       },
       (error) => {}
     );
+  }
+  onSelectVariation(variation: VariationDTO): void {
+    this.selectedVariation = variation;
   }
 }
