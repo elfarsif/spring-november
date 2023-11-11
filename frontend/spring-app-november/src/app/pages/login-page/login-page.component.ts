@@ -27,14 +27,31 @@ export class LoginPageComponent {
   onSubmit() {
     this.authService.login(this.username, this.password).subscribe(
       (data) => {
-        console.log('Logged in!', data);
-        this.cookieService.set('userId', data.id);
+        const userId = this.getUserIdFromToken(data.token);
+        if (userId != null) {
+          const userIdStr = userId.toString();
+          console.log('Logged in!', data);
+          this.cookieService.set('userId', userIdStr);
+        } else {
+          console.error('User ID not found in token');
+        }
         this.router.navigate(['/landing']);
       },
       (error) => {
         console.error('Login error', error);
       }
     );
+  }
+  getUserIdFromToken(token: string): number | null {
+    try {
+      const payload = token.split('.')[1]; // Get the payload part
+      const decodedPayload = atob(payload); // Decode Base64
+      const payloadObject = JSON.parse(decodedPayload);
+      return payloadObject.userId; // Adjust depending on how the claim is named
+    } catch (error) {
+      console.error('Error parsing token', error);
+      return null;
+    }
   }
 
   openRegisterPopup(): void {

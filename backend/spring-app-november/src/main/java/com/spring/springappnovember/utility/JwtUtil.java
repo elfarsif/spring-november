@@ -16,11 +16,12 @@ public class JwtUtil {
 	    private final static Algorithm algorithm = Algorithm.HMAC256(SECRET);
 
 	    // Generate token with a "username" claim
-	    public static String generateToken(String username) {
+	    public static String generateToken(String username,Long userId) {
 	        long expirationTime = 1000 * 60 * 60; // 1 hour in milliseconds
 	        return JWT.create()
 	                .withSubject("Authentication") // Use a general subject
 	                .withClaim("username", username) // Add "username" as a claim
+	                .withClaim("userId", userId)
 	                .withExpiresAt(new Date(System.currentTimeMillis() + expirationTime))
 	                .sign(algorithm);
 	    }
@@ -33,6 +34,17 @@ public class JwtUtil {
 	            return jwt.getClaim("username").asString(); // Extract the username claim
 	        } catch (JWTVerificationException exception) {
 	            //Invalid signature/claims
+	            return null;
+	        }
+	    }
+	 // Extract the userId from the token
+	    public static Long getUserIdFromToken(String token) {
+	        try {
+	            JWTVerifier verifier = JWT.require(algorithm).build();
+	            DecodedJWT jwt = verifier.verify(token);
+	            return jwt.getClaim("userId").asLong(); // Extract the userId claim
+	        } catch (JWTVerificationException exception) {
+	            // Invalid signature/claims
 	            return null;
 	        }
 	    }

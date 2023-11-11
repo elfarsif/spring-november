@@ -52,8 +52,9 @@ public class UserController {
     public ResponseEntity<?> login(@RequestBody UserDto userDTO) {
     	System.out.println("UserController /users/login endpoint Triggered");
     	UserDto authenticatedUserDTO = userService.authenticate(userDTO.getUsername(), userDTO.getPassword());
-        if (authenticatedUserDTO != null) {
-            String token = JwtUtil.generateToken(userDTO.getUsername());
+        
+    	if (authenticatedUserDTO != null) {
+            String token = JwtUtil.generateToken(userDTO.getUsername(),authenticatedUserDTO.getId());
             return ResponseEntity.ok(Map.of("token", token));  // Return as JSON
         }
         return ResponseEntity.badRequest().body("Invalid username or password");

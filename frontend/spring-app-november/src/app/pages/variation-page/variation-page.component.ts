@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { VariationDTO } from 'src/app/models/variation-dto.model';
 import { VariationService } from 'src/app/services/variation/variation.service';
 
@@ -17,7 +18,8 @@ export class VariationPageComponent {
   constructor(
     private variationService: VariationService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) {}
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -44,10 +46,9 @@ export class VariationPageComponent {
   }
   submitNewVariation() {
     this.showModal = true;
-    const recipeId = this.variations[0].recipe.recipeId;
-    const userId = this.variations[0].recipe.user.id;
+    const userId = +this.cookieService.get('userId');
     this.variationService
-      .postNewVariation(this.newVariationTitle, recipeId, userId)
+      .postNewVariation(this.newVariationTitle, this.recipeId, userId)
       .subscribe(
         (variation) => {
           console.log('Variation created:', variation);

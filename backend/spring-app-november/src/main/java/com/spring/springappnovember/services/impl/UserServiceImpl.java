@@ -75,6 +75,7 @@ public class UserServiceImpl implements UserService {
     	if (user != null && password.equals(user.getPassword())) { 
     		UserDto userDTO = new UserDto();
             BeanUtils.copyProperties(user, userDTO);
+            System.out.println(userDTO);
             return userDTO;
         }
     	return null;

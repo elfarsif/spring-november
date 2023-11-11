@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { RecipeDTO } from 'src/app/models/recipe-dto.model';
 import { RecipeService } from 'src/app/services/recipe/recipe.service';
 import { VariationService } from 'src/app/services/variation/variation.service';
@@ -17,7 +18,8 @@ export class RecipeListComponent {
   constructor(
     private recipeService: RecipeService,
     private router: Router,
-    private variationService: VariationService
+    private variationService: VariationService,
+    private cookieService: CookieService
   ) {}
   ngOnInit(): void {
     this.loadRecipes();
@@ -33,7 +35,7 @@ export class RecipeListComponent {
   }
   submitNewRecipe() {
     console.log('submit new recipe');
-    const userId = this.recipes[0].user.id;
+    const userId = +this.cookieService.get('userId');
     this.recipeService.postNewRecipe(this.newRecipeTitle, userId).subscribe(
       (data) => {
         console.log('Recipe Created ' + data);
