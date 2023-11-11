@@ -23,3 +23,45 @@
     <button type="submit">Login</button>
   </form>
 </div>
+<button (click)="openRegisterPopup()">Sign Up</button>
+
+<!-- Registration Modal -->
+<div *ngIf="showRegisterModal" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="closeRegisterPopup()">&times;</span>
+    <h3>Register New User</h3>
+    <form (ngSubmit)="registerNewUser()">
+      <div>
+        <label for="newUsername">Username:</label>
+        <input
+          type="text"
+          id="newUsername"
+          [(ngModel)]="newUserUsername"
+          name="newUsername"
+          required
+        />
+      </div>
+      <div>
+        <label for="newPassword">Password:</label>
+        <input
+          type="password"
+          id="newPassword"
+          [(ngModel)]="newUserPassword"
+          name="newPassword"
+          required
+        />
+      </div>
+      <div>
+        <label for="newEmail">Email:</label>
+        <input
+          type="email"
+          id="newEmail"
+          [(ngModel)]="newUserEmail"
+          name="newEmail"
+          required
+        />
+      </div>
+      <button type="submit">Register</button>
+    </form>
+  </div>
+</div>

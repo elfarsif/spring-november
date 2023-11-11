@@ -4,6 +4,7 @@ import com.spring.springappnovember.dtos.RecipeDto;
 import com.spring.springappnovember.entities.Recipe;
 import com.spring.springappnovember.repositories.RecipeRepository;
 import com.spring.springappnovember.services.RecipeService;
+import com.spring.springappnovember.services.VariationService;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 public class RecipeServiceImpl implements RecipeService {
 
     private final RecipeRepository recipeRepository;
+    
 
     @Autowired
     public RecipeServiceImpl(RecipeRepository recipeRepository) {

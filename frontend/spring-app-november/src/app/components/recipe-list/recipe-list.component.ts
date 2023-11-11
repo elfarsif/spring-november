@@ -34,22 +34,10 @@ export class RecipeListComponent {
   submitNewRecipe() {
     console.log('submit new recipe');
     const userId = this.recipes[0].user.id;
-    const recipeId = this.recipes[0].recipeId;
     this.recipeService.postNewRecipe(this.newRecipeTitle, userId).subscribe(
       (data) => {
         console.log('Recipe Created ' + data);
         //also add a default variation for functionality
-        const newRecipeId = data.recipeId;
-        this.variationService
-          .postNewVariation('Main Variation', newRecipeId, userId)
-          .subscribe(
-            (data) => {
-              console.log('Variation created:', data);
-            },
-            (error) => {
-              console.error('Error creating variation:', error);
-            }
-          );
         this.refreshCurrentRoute();
       },
       (error) => {

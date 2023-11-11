@@ -4,9 +4,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.springappnovember.dtos.RecipeDto;
 import com.spring.springappnovember.dtos.UserDto;
+import com.spring.springappnovember.entities.Recipe;
 import com.spring.springappnovember.entities.User;
+import com.spring.springappnovember.repositories.RecipeRepository;
 import com.spring.springappnovember.repositories.UserRepository;
+import com.spring.springappnovember.services.RecipeService;
 import com.spring.springappnovember.services.UserService;
 
 import java.util.List;
@@ -16,7 +20,6 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 	@Autowired
     private final UserRepository userRepository;
-
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -28,6 +31,7 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(userDto, user);
         user = userRepository.save(user);
         BeanUtils.copyProperties(user, userDto);
+        
         return userDto;
     }
 

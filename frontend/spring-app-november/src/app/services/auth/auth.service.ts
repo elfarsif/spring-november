@@ -39,4 +39,14 @@ export class AuthService {
   isLoggedIn(): boolean {
     return this.cookieService.check('token');
   }
+
+  postNewUser(username: string, password: string, email: string) {
+    const payload = {
+      username: username,
+      password: password,
+      email: email,
+    };
+
+    return this.http.post<any>(`${this.apiUrl}/users/register`, payload);
+  }
 }

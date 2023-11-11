@@ -21,7 +21,7 @@ public class SecurityConfig {
         .cors().and()
         .csrf().disable()
         .authorizeRequests()
-        	.requestMatchers("/users/login").permitAll()
+        	.requestMatchers("/users/login", "/users/register").permitAll()
         	.anyRequest().authenticated()
         .and()
         .addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
