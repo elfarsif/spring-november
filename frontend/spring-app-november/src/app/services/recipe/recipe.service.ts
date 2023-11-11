@@ -23,4 +23,20 @@ export class RecipeService {
       headers,
     });
   }
+
+  postNewRecipe(title: string, userId: number) {
+    const token = this.cookieService.get('token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    const payload = {
+      title: title,
+      user: {
+        id: userId,
+      },
+    };
+    return this.http.post<RecipeDTO>(`${this.apiUrl}`, payload, { headers });
+  }
 }

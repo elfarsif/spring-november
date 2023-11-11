@@ -44,8 +44,8 @@ export class VariationPageComponent {
   }
   submitNewVariation() {
     this.showModal = true;
-    const recipeId = this.variations[0].recipe.recipeId; // Assuming you have recipeId in your DTO
-    const userId = this.variations[0].recipe.user.id; // Assuming you have userId in your DTO
+    const recipeId = this.variations[0].recipe.recipeId;
+    const userId = this.variations[0].recipe.user.id;
     this.variationService
       .postNewVariation(this.newVariationTitle, recipeId, userId)
       .subscribe(
