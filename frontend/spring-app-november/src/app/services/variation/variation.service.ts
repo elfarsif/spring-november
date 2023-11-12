@@ -43,4 +43,18 @@ export class VariationService {
     };
     return this.http.post<VariationDTO>(`${this.apiUrl}`, payload, { headers });
   }
+  updateVariation(variation: VariationDTO) {
+    const token = this.cookieService.get('token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    const payload: VariationDTO = variation;
+    return this.http.put<VariationDTO>(
+      `${this.apiUrl}/${variation.variationId}`,
+      payload,
+      { headers }
+    );
+  }
 }

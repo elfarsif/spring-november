@@ -4,8 +4,8 @@
     <li *ngFor="let variation of variations">
       <button (click)="onSelectVariation(variation)">
         {{ variation.variationTitle }}
+        <button (click)="openEditPopup(variation)">Edit</button>
       </button>
-      <button (click)="openEditPopup()">Edit</button>
     </li>
     <li>
       <button (click)="openPopup()">New Variation</button>

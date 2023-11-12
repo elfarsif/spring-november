@@ -13,6 +13,7 @@ export class VariationPageComponent {
   variations!: VariationDTO[];
   recipeId!: number;
   selectedVariation?: VariationDTO;
+  selectedVariationForEdit!: VariationDTO;
   showModal: boolean = false;
   showEditModal: boolean = false;
   newVariationTitle: string = '';
@@ -36,7 +37,7 @@ export class VariationPageComponent {
     );
   }
   onSelectVariation(variation: VariationDTO): void {
-    this.selectedVariation = variation;
+    this.selectedVariationForEdit = variation;
   }
 
   closePopup(): void {
@@ -45,8 +46,10 @@ export class VariationPageComponent {
   openPopup(): void {
     this.showModal = true;
   }
-  openEditPopup(): void {
+  openEditPopup(variation: VariationDTO): void {
     this.showEditModal = true;
+    this.selectedVariation = variation;
+    console.log(this.selectedVariation.recipe.recipeId);
   }
   closeEditPopup(): void {
     this.showEditModal = false;
@@ -68,7 +71,22 @@ export class VariationPageComponent {
       );
   }
   updateVariationTitle() {
-    console.log('update variation title to ' + this.newVariationTitle);
+    console.log('update variation title to ' + this.selectedVariationForEdit);
+    this.selectedVariationForEdit.variationTitle = this.newVariationTitle;
+    this.variationService
+      .updateVariation(this.selectedVariationForEdit)
+      .subscribe(
+        (response) => {
+          console.log('Variation updated:', response);
+
+          this.refreshCurrentRoute();
+          // Handle the response
+        },
+        (error) => {
+          console.error('Error updating variation:', error);
+          // Handle the error
+        }
+      );
   }
   private refreshCurrentRoute() {
     const currentUrl = this.router.url;
