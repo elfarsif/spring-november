@@ -14,6 +14,7 @@ export class VariationPageComponent {
   recipeId!: number;
   selectedVariation?: VariationDTO;
   showModal: boolean = false;
+  showEditModal: boolean = false;
   newVariationTitle: string = '';
   constructor(
     private variationService: VariationService,
@@ -44,6 +45,12 @@ export class VariationPageComponent {
   openPopup(): void {
     this.showModal = true;
   }
+  openEditPopup(): void {
+    this.showEditModal = true;
+  }
+  closeEditPopup(): void {
+    this.showEditModal = false;
+  }
   submitNewVariation() {
     this.showModal = true;
     const userId = +this.cookieService.get('userId');
@@ -60,7 +67,9 @@ export class VariationPageComponent {
         }
       );
   }
-
+  updateVariationTitle() {
+    console.log('update variation title to ' + this.newVariationTitle);
+  }
   private refreshCurrentRoute() {
     const currentUrl = this.router.url;
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
