@@ -57,4 +57,13 @@ export class VariationService {
       { headers }
     );
   }
+
+  deleteVariation(variationId: number) {
+    const token = this.cookieService.get('token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.delete(`${this.apiUrl}/${variationId}`, { headers });
+  }
 }

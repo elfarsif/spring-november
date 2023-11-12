@@ -12,8 +12,9 @@ import { VariationService } from 'src/app/services/variation/variation.service';
 })
 export class RecipeListComponent {
   recipes!: RecipeDTO[];
-  selectedRecipe?: RecipeDTO;
+  selectedRecipe!: RecipeDTO;
   showModal: boolean = false;
+  showEditModal: boolean = false;
   newRecipeTitle: string = '';
   constructor(
     private recipeService: RecipeService,
@@ -56,6 +57,38 @@ export class RecipeListComponent {
   }
   openPopup(): void {
     this.showModal = true;
+  }
+  openEditPopup(recipe: RecipeDTO): void {
+    this.showEditModal = true;
+    this.selectedRecipe = recipe;
+  }
+  closeEditPopup() {
+    this.showEditModal = false;
+  }
+  updateRecipeTitle() {
+    console.log('Update reciope' + this.selectedRecipe.title);
+    this.selectedRecipe.title = this.newRecipeTitle;
+    this.recipeService.updateRecipe(this.selectedRecipe).subscribe(
+      (response) => {
+        console.log('Recipe updated:', response);
+        this.refreshCurrentRoute();
+      },
+      (error) => {
+        console.error('Error updating Recipe:', error);
+      }
+    );
+  }
+
+  removeRecipe(recipe: RecipeDTO) {
+    this.recipeService.deleteRecipe(recipe.recipeId).subscribe(
+      () => {
+        console.log('Recipe deleted successfully');
+        this.refreshCurrentRoute();
+      },
+      (error) => {
+        console.error('Error deleting recipe', error);
+      }
+    );
   }
   private refreshCurrentRoute() {
     const currentUrl = this.router.url;

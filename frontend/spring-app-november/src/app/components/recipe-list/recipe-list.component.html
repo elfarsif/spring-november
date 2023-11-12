@@ -5,6 +5,8 @@
       <a [routerLink]="['/variations', recipe.recipeId]">
         {{ recipe.title }}
       </a>
+      <button (click)="openEditPopup(recipe)">edit</button>
+      <button (click)="removeRecipe(recipe)">Remove</button>
     </li>
     <li>
       <button (click)="openPopup()">New Recipe</button>
@@ -19,5 +21,14 @@
     <p>Enter New Variation Title:</p>
     <input type="text" [(ngModel)]="newRecipeTitle" />
     <button (click)="submitNewRecipe()">Submit</button>
+  </div>
+</div>
+<!-- Modal for update variation title -->
+<div *ngIf="showEditModal" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="closeEditPopup()">&times;</span>
+    <p>Edit Variation Title:</p>
+    <input type="text" [(ngModel)]="newRecipeTitle" />
+    <button (click)="updateRecipeTitle()">Submit</button>
   </div>
 </div>

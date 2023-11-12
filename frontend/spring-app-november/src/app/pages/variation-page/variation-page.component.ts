@@ -88,6 +88,17 @@ export class VariationPageComponent {
         }
       );
   }
+  removeVariation(variation: VariationDTO) {
+    this.variationService.deleteVariation(variation.variationId).subscribe(
+      () => {
+        console.log('Variation deleted successfully');
+        this.refreshCurrentRoute();
+      },
+      (error) => {
+        console.error('Error deleting variation', error);
+      }
+    );
+  }
   private refreshCurrentRoute() {
     const currentUrl = this.router.url;
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {

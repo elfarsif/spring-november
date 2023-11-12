@@ -40,7 +40,8 @@ public class RecipeController {
 
     @PutMapping("/{id}")
     public ResponseEntity<RecipeDto> updateRecipe(@PathVariable Long id, @RequestBody RecipeDto recipeDto) {
-        return ResponseEntity.ok(recipeService.updateRecipe(id, recipeDto));
+        recipeDto.setRecipeId(id);
+    	return ResponseEntity.ok(recipeService.updateRecipe(id, recipeDto));
     }
 
     @DeleteMapping("/{id}")

@@ -39,4 +39,28 @@ export class RecipeService {
     };
     return this.http.post<RecipeDTO>(`${this.apiUrl}`, payload, { headers });
   }
+
+  updateRecipe(recipe: RecipeDTO) {
+    const token = this.cookieService.get('token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    const payload: RecipeDTO = recipe;
+    return this.http.put<RecipeDTO>(
+      `${this.apiUrl}/${recipe.recipeId}`,
+      payload,
+      { headers }
+    );
+  }
+
+  deleteRecipe(recipeId: number) {
+    const token = this.cookieService.get('token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.delete(`${this.apiUrl}/${recipeId}`, { headers });
+  }
 }
