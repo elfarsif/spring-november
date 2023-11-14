@@ -1,0 +1,16 @@
+<div class="comparison-container">
+  <div class="text-container">
+    <div class="text-section">
+      <h3>Current Variation:</h3>
+      <pre>
+        <div *ngFor="let line of lines1" [class.highlight]="line.isDiff">{{ line.text }}</div>
+      </pre>
+    </div>
+    <div class="text-section">
+      <h3>Chosen Recipe:</h3>
+      <pre>
+        <div *ngFor="let line of lines2" [class.highlight]="line.isDiff">{{ line.text }}</div>
+      </pre>
+    </div>
+  </div>
+</div>

@@ -4,7 +4,7 @@
     <li *ngFor="let variation of variations">
       <button (click)="onSelectVariation(variation)">
         {{ variation.variationTitle }}
-        <button (click)="openEditPopup(variation)">Edit</button>
+        <button (click)="openEditPopup(variation)">Edit Title</button>
         <button (click)="removeVariation(variation)">Remove</button>
       </button>
     </li>
@@ -13,9 +13,19 @@
     </li>
   </ul>
 </div>
+
 <div *ngIf="selectedVariation">
-  <h3>Instructions</h3>
-  <p>{{ selectedVariation.instructions }}</p>
+  <h3>Instructions for {{ selectedVariation.variationTitle }}</h3>
+  <button (click)="openPullPopup()">Compare Varition</button>
+  <textarea
+    [(ngModel)]="selectedVariation.instructions"
+    (blur)="updateInstructions()"
+  >
+  </textarea>
+  <app-text-comparison
+    [text1]="selectedVariation.instructions"
+    [text2]="selectedPulledVariation.instructions"
+  ></app-text-comparison>
 </div>
 <!-- Modal for new variation -->
 <div *ngIf="showModal" class="modal">
@@ -33,5 +43,19 @@
     <p>Edit Variation Title:</p>
     <input type="text" [(ngModel)]="newVariationTitle" />
     <button (click)="updateVariationTitle()">Submit</button>
+  </div>
+</div>
+<!-- Modal for pull function -->
+<div *ngIf="showPullModal" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="closePullPopup()">&times;</span>
+    <p>What variation do you want to compare to?</p>
+    <ul>
+      <li *ngFor="let variation of variations">
+        <button (click)="setPulledVariation(variation)">
+          {{ variation.variationTitle }}
+        </button>
+      </li>
+    </ul>
   </div>
 </div>

@@ -8,9 +8,10 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { HttpClientModule } from '@angular/common/http';
 import { RecipeListComponent } from './components/recipe-list/recipe-list.component';
 import { VariationPageComponent } from './pages/variation-page/variation-page.component';
+import { TextComparisonComponent } from './components/text-comparison/text-comparison/text-comparison.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, LandingPageComponent, RecipeListComponent, VariationPageComponent],
+  declarations: [AppComponent, LoginPageComponent, LandingPageComponent, RecipeListComponent, VariationPageComponent, TextComparisonComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],

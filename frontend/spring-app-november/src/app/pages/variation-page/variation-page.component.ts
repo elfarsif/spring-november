@@ -12,10 +12,14 @@ import { VariationService } from 'src/app/services/variation/variation.service';
 export class VariationPageComponent {
   variations!: VariationDTO[];
   recipeId!: number;
-  selectedVariation?: VariationDTO;
+  selectedVariation!: VariationDTO;
   selectedVariationForEdit!: VariationDTO;
+  selectedPulledVariation!: VariationDTO;
   showModal: boolean = false;
   showEditModal: boolean = false;
+  showPullModal: boolean = false;
+  showPulledVariation: boolean = true;
+
   newVariationTitle: string = '';
   constructor(
     private variationService: VariationService,
@@ -31,13 +35,14 @@ export class VariationPageComponent {
       (data) => {
         this.variations = data;
         this.selectedVariation = this.variations[0];
+        this.selectedPulledVariation = this.selectedVariation;
         console.log(this.variations);
       },
       (error) => {}
     );
   }
   onSelectVariation(variation: VariationDTO): void {
-    this.selectedVariationForEdit = variation;
+    this.selectedVariation = variation;
   }
 
   closePopup(): void {
@@ -46,10 +51,19 @@ export class VariationPageComponent {
   openPopup(): void {
     this.showModal = true;
   }
+  closePullPopup(): void {
+    this.showPullModal = false;
+  }
+  openPullPopup(): void {
+    this.showPullModal = true;
+  }
+  setPulledVariation(variation: VariationDTO) {
+    this.selectedPulledVariation = variation;
+  }
   openEditPopup(variation: VariationDTO): void {
     this.showEditModal = true;
-    this.selectedVariation = variation;
-    console.log(this.selectedVariation.recipe.recipeId);
+    this.selectedVariationForEdit = variation;
+    console.log(this.selectedVariationForEdit.recipe.recipeId);
   }
   closeEditPopup(): void {
     this.showEditModal = false;
@@ -96,6 +110,20 @@ export class VariationPageComponent {
       },
       (error) => {
         console.error('Error deleting variation', error);
+      }
+    );
+  }
+  updateInstructions() {
+    console.log(
+      'Instructions were edited:',
+      this.selectedVariation.instructions
+    );
+    this.variationService.updateVariation(this.selectedVariation).subscribe(
+      (response) => {
+        console.log('Variation Instructions updated:', response);
+      },
+      (error) => {
+        console.error('Error updating variation instructions:', error);
       }
     );
   }
