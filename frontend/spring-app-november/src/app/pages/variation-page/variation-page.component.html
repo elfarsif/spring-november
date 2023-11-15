@@ -4,7 +4,11 @@
   <ul>
     <li *ngFor="let variation of variations">
       <button (click)="onSelectVariation(variation)">
-        {{ variation.variationTitle }}
+        {{
+          variation.isMain == true
+            ? "Main variation / " + variation.variationTitle
+            : variation.variationTitle
+        }}
         <button (click)="openEditPopup(variation)">Edit Title</button>
         <button (click)="removeVariation(variation)">Remove</button>
       </button>
@@ -54,7 +58,11 @@
     <ul>
       <li *ngFor="let variation of variations">
         <button (click)="setPulledVariation(variation)">
-          {{ variation.variationTitle }}
+          {{
+            variation.isMain == true
+              ? "Main variation / " + variation.variationTitle
+              : variation.variationTitle
+          }}
         </button>
       </li>
     </ul>

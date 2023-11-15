@@ -5,4 +5,5 @@ export interface VariationDTO {
   variationTitle: string;
   instructions: string;
   recipe: RecipeDTO;
+  isMain: boolean;
 }

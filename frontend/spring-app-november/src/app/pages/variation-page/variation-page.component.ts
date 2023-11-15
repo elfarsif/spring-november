@@ -20,6 +20,7 @@ export class VariationPageComponent {
   showEditModal: boolean = false;
   showPullModal: boolean = false;
   showPulledVariation: boolean = true;
+  variationIsMain: boolean = false;
 
   newVariationTitle: string = '';
   constructor(
@@ -157,6 +158,7 @@ export class VariationPageComponent {
     this.variationService.getMainVariationByRecipeId(this.recipeId).subscribe(
       (data) => {
         this.mainVariation = data[0];
+        console.log('main variation is');
         console.log(this.mainVariation);
       },
       (error) => {
