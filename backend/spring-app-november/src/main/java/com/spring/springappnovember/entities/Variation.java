@@ -23,4 +23,6 @@ public class Variation {
     @ManyToOne
     @JoinColumn(name = "recipe_id", nullable = false)
     private Recipe recipe;
+    
+    private Boolean isMain;
 }

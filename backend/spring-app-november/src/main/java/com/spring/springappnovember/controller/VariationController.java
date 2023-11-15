@@ -53,4 +53,9 @@ public class VariationController {
         List<VariationDto> variations = variationService.getVariationsByRecipeId(recipeId);
         return ResponseEntity.ok(variations);
     }
+    
+    @GetMapping("/main/{recipeId}")
+    public List<VariationDto> getMainVariations(@PathVariable Long recipeId) {
+        return variationService.getMainVariationsByRecipeId(recipeId);
+    }
 }

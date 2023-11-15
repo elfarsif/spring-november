@@ -1,6 +1,7 @@
 package com.spring.springappnovember.dtos;
 
 import com.spring.springappnovember.entities.User;
+import com.spring.springappnovember.entities.Variation;
 
 import lombok.Data;
 

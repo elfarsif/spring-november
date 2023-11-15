@@ -13,5 +13,6 @@ public class VariationDto {
     private String instructions;
 
     private Recipe recipe;
+    private Boolean isMain;
 
 }

@@ -24,7 +24,12 @@ export class VariationService {
     });
   }
 
-  postNewVariation(variationTitle: string, recipeId: number, userId: number) {
+  postNewVariation(
+    variationTitle: string,
+    recipeId: number,
+    userId: number,
+    isMain: boolean
+  ) {
     const token = this.cookieService.get('token');
 
     const headers = new HttpHeaders({
@@ -34,6 +39,7 @@ export class VariationService {
     const payload = {
       variationTitle: variationTitle,
       instructions: '',
+      isMain: isMain,
       recipe: {
         recipeId: recipeId,
         user: {
@@ -65,5 +71,17 @@ export class VariationService {
       Authorization: `Bearer ${token}`,
     });
     return this.http.delete(`${this.apiUrl}/${variationId}`, { headers });
+  }
+
+  getMainVariationByRecipeId(recipeId: number): Observable<VariationDTO[]> {
+    const token = this.cookieService.get('token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get<VariationDTO[]>(`${this.apiUrl}/main/${recipeId}`, {
+      headers,
+    });
   }
 }

@@ -71,6 +71,14 @@ public class VariationServiceImpl implements VariationService {
                 .orElseThrow(() -> new RuntimeException("Variation not found with id: " + id));
         variationRepository.delete(variation);
     }
+    
+    @Override
+    public List<VariationDto> getMainVariationsByRecipeId(Long recipeId) {
+    	List<Variation> variations = variationRepository.findByRecipeRecipeIdAndIsMainTrue(recipeId);
+    	return variations.stream()
+                .map(this::convertEntityToDto)
+                .collect(Collectors.toList());
+    }
 
     private VariationDto convertEntityToDto(Variation variation) {
         VariationDto variationDto = new VariationDto();

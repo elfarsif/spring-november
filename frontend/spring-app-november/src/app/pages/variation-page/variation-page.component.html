@@ -1,5 +1,6 @@
 <div>
   <h2>My Variations</h2>
+  <button (click)="getMainVariationByRecipeId()">Main Variation</button>
   <ul>
     <li *ngFor="let variation of variations">
       <button (click)="onSelectVariation(variation)">

@@ -24,9 +24,9 @@ CREATE TABLE variations (
     recipe_id BIGINT NOT NULL,
     variation_title VARCHAR(255) NOT NULL,
     instructions TEXT NOT NULL,  -- Large text for detailed instructions
+    is_main BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id) ON DELETE CASCADE
 );
-
 
 
 INSERT INTO users (username, password, email) VALUES ('u1', 'p1', 'alice@example.com');
@@ -41,40 +41,40 @@ INSERT INTO recipes (user_id, title) VALUES ((SELECT id FROM users WHERE usernam
 INSERT INTO recipes (user_id, title) VALUES ((SELECT id FROM users WHERE username = 'u3'), 'Quinoa Salad');
 
 -- Insert variations for Chocolate Chip Cookies
-INSERT INTO variations (recipe_id, variation_title, instructions) 
+INSERT INTO variations (recipe_id, variation_title, instructions, is_main) 
 VALUES 
-((SELECT recipe_id FROM recipes WHERE title = 'Chocolate Chip Cookies'), 'Classic Style', 'Instructions for classic chocolate chip cookies.'),
-((SELECT recipe_id FROM recipes WHERE title = 'Chocolate Chip Cookies'), 'Nutty Variation', 'Instructions for chocolate chip cookies with nuts.');
+((SELECT recipe_id FROM recipes WHERE title = 'Chocolate Chip Cookies'), 'Classic Style', 'Instructions for classic chocolate chip cookies.',1),
+((SELECT recipe_id FROM recipes WHERE title = 'Chocolate Chip Cookies'), 'Nutty Variation', 'Instructions for chocolate chip cookies with nuts.',0);
 
 -- Insert variations for Banana Bread
-INSERT INTO variations (recipe_id, variation_title, instructions) 
+INSERT INTO variations (recipe_id, variation_title, instructions, is_main) 
 VALUES 
-((SELECT recipe_id FROM recipes WHERE title = 'Banana Bread'), 'Walnut Banana Bread', 'Instructions for banana bread with walnuts.'),
-((SELECT recipe_id FROM recipes WHERE title = 'Banana Bread'), 'Chocolate Chip Banana Bread', 'Instructions for banana bread with chocolate chips.');
+((SELECT recipe_id FROM recipes WHERE title = 'Banana Bread'), 'Walnut Banana Bread', 'Instructions for banana bread with walnuts.',1),
+((SELECT recipe_id FROM recipes WHERE title = 'Banana Bread'), 'Chocolate Chip Banana Bread', 'Instructions for banana bread with chocolate chips.',0);
 
 -- Insert variations for Spaghetti Carbonara
-INSERT INTO variations (recipe_id, variation_title, instructions) 
+INSERT INTO variations (recipe_id, variation_title, instructions, is_main) 
 VALUES 
-((SELECT recipe_id FROM recipes WHERE title = 'Spaghetti Carbonara'), 'Classic Carbonara', 'Instructions for classic Carbonara.'),
-((SELECT recipe_id FROM recipes WHERE title = 'Spaghetti Carbonara'), 'Vegetarian Carbonara', 'Instructions for vegetarian Carbonara.');
+((SELECT recipe_id FROM recipes WHERE title = 'Spaghetti Carbonara'), 'Classic Carbonara', 'Instructions for classic Carbonara.',1),
+((SELECT recipe_id FROM recipes WHERE title = 'Spaghetti Carbonara'), 'Vegetarian Carbonara', 'Instructions for vegetarian Carbonara.',0);
 
 -- Insert variations for Classic Caesar Salad
-INSERT INTO variations (recipe_id, variation_title, instructions) 
+INSERT INTO variations (recipe_id, variation_title, instructions, is_main) 
 VALUES 
-((SELECT recipe_id FROM recipes WHERE title = 'Classic Caesar Salad'), 'Grilled Chicken Caesar', 'Instructions for Caesar salad with grilled chicken.'),
-((SELECT recipe_id FROM recipes WHERE title = 'Classic Caesar Salad'), 'Caesar Salad with Shrimp', 'Instructions for Caesar salad with shrimp.');
+((SELECT recipe_id FROM recipes WHERE title = 'Classic Caesar Salad'), 'Grilled Chicken Caesar', 'Instructions for Caesar salad with grilled chicken.',1),
+((SELECT recipe_id FROM recipes WHERE title = 'Classic Caesar Salad'), 'Caesar Salad with Shrimp', 'Instructions for Caesar salad with shrimp.',0);
 
 -- Insert variations for Vegetable Stir Fry
-INSERT INTO variations (recipe_id, variation_title, instructions) 
+INSERT INTO variations (recipe_id, variation_title, instructions, is_main) 
 VALUES 
-((SELECT recipe_id FROM recipes WHERE title = 'Vegetable Stir Fry'), 'Tofu Stir Fry', 'Instructions for vegetable stir fry with tofu.'),
-((SELECT recipe_id FROM recipes WHERE title = 'Vegetable Stir Fry'), 'Chicken Stir Fry', 'Instructions for vegetable stir fry with chicken.');
+((SELECT recipe_id FROM recipes WHERE title = 'Vegetable Stir Fry'), 'Tofu Stir Fry', 'Instructions for vegetable stir fry with tofu.',1),
+((SELECT recipe_id FROM recipes WHERE title = 'Vegetable Stir Fry'), 'Chicken Stir Fry', 'Instructions for vegetable stir fry with chicken.',0);
 
 -- Insert variations for Quinoa Salad
-INSERT INTO variations (recipe_id, variation_title, instructions) 
+INSERT INTO variations (recipe_id, variation_title, instructions, is_main) 
 VALUES 
-((SELECT recipe_id FROM recipes WHERE title = 'Quinoa Salad'), 'Mediterranean Quinoa Salad', 'Instructions for Mediterranean-style quinoa salad.'),
-((SELECT recipe_id FROM recipes WHERE title = 'Quinoa Salad'), 'Mexican Quinoa Salad', 'Instructions for Mexican-style quinoa salad.');
+((SELECT recipe_id FROM recipes WHERE title = 'Quinoa Salad'), 'Mediterranean Quinoa Salad', 'Instructions for Mediterranean-style quinoa salad.',1),
+((SELECT recipe_id FROM recipes WHERE title = 'Quinoa Salad'), 'Mexican Quinoa Salad', 'Instructions for Mexican-style quinoa salad.',0);
 
 
 commit;

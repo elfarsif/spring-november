@@ -11,4 +11,5 @@ import org.springframework.stereotype.Repository;
 public interface VariationRepository extends JpaRepository<Variation, Integer> {
 
     List<Variation> findByRecipeRecipeId(Long recipeId);
+    List<Variation> findByRecipeRecipeIdAndIsMainTrue(Long recipeId);
 }

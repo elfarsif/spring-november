@@ -11,6 +11,7 @@ import { VariationService } from 'src/app/services/variation/variation.service';
 })
 export class VariationPageComponent {
   variations!: VariationDTO[];
+  mainVariation!: VariationDTO;
   recipeId!: number;
   selectedVariation!: VariationDTO;
   selectedVariationForEdit!: VariationDTO;
@@ -40,6 +41,7 @@ export class VariationPageComponent {
       },
       (error) => {}
     );
+    this.getMainVariationByRecipeId();
   }
   onSelectVariation(variation: VariationDTO): void {
     this.selectedVariation = variation;
@@ -71,18 +73,35 @@ export class VariationPageComponent {
   submitNewVariation() {
     this.showModal = true;
     const userId = +this.cookieService.get('userId');
-    this.variationService
-      .postNewVariation(this.newVariationTitle, this.recipeId, userId)
-      .subscribe(
-        (variation) => {
-          console.log('Variation created:', variation);
+    if (this.mainVariation != null) {
+      console.log('Theres a main Variation');
+      this.variationService
+        .postNewVariation(this.newVariationTitle, this.recipeId, userId, false)
+        .subscribe(
+          (variation) => {
+            console.log('Variation created:', variation);
 
-          this.refreshCurrentRoute();
-        },
-        (error) => {
-          console.error('Error creating variation:', error);
-        }
-      );
+            this.refreshCurrentRoute();
+          },
+          (error) => {
+            console.error('Error creating variation:', error);
+          }
+        );
+    } else {
+      console.log('No main Variation');
+      this.variationService
+        .postNewVariation(this.newVariationTitle, this.recipeId, userId, true)
+        .subscribe(
+          (variation) => {
+            console.log('Variation created:', variation);
+
+            this.refreshCurrentRoute();
+          },
+          (error) => {
+            console.error('Error creating variation:', error);
+          }
+        );
+    }
   }
   updateVariationTitle() {
     console.log('update variation title to ' + this.selectedVariationForEdit);
@@ -132,5 +151,17 @@ export class VariationPageComponent {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([currentUrl]);
     });
+  }
+
+  getMainVariationByRecipeId() {
+    this.variationService.getMainVariationByRecipeId(this.recipeId).subscribe(
+      (data) => {
+        this.mainVariation = data[0];
+        console.log(this.mainVariation);
+      },
+      (error) => {
+        console.error('Error in getMainVariationByRecipeId', error);
+      }
+    );
   }
 }
