@@ -1,6 +1,5 @@
 <div>
   <h2>My Variations</h2>
-  <button (click)="getMainVariationByRecipeId()">Main Variation</button>
   <ul>
     <li *ngFor="let variation of variations">
       <button (click)="onSelectVariation(variation)">
@@ -21,16 +20,21 @@
 
 <div *ngIf="selectedVariation">
   <h3>Instructions for {{ selectedVariation.variationTitle }}</h3>
-  <button (click)="openPullPopup()">Compare Varition</button>
+  <!-- <button (click)="openPullPopup()">Compare Varition</button> -->
+
+  <button (click)="compareToMain()">Compare to Main Variation</button>
   <textarea
     [(ngModel)]="selectedVariation.instructions"
     (blur)="updateInstructions()"
   >
   </textarea>
-  <app-text-comparison
-    [text1]="selectedVariation.instructions"
-    [text2]="selectedPulledVariation.instructions"
-  ></app-text-comparison>
+  <div *ngIf="showMainVariation">
+    <app-text-comparison
+      [text1]="selectedVariation.instructions"
+      [text2]="selectedPulledVariation.instructions"
+    ></app-text-comparison>
+    <button (click)="commitChanges()">Commit changes to Main</button>
+  </div>
 </div>
 <!-- Modal for new variation -->
 <div *ngIf="showModal" class="modal">
@@ -65,6 +69,7 @@
           }}
         </button>
       </li>
+      <button (click)="commitChanges()">Commit changes to Variation</button>
     </ul>
   </div>
 </div>

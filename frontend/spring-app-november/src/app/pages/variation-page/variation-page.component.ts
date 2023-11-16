@@ -21,6 +21,7 @@ export class VariationPageComponent {
   showPullModal: boolean = false;
   showPulledVariation: boolean = true;
   variationIsMain: boolean = false;
+  showMainVariation: boolean = false;
 
   newVariationTitle: string = '';
   constructor(
@@ -165,5 +166,32 @@ export class VariationPageComponent {
         console.error('Error in getMainVariationByRecipeId', error);
       }
     );
+  }
+
+  compareToMain() {
+    this.showMainVariation = !this.showMainVariation;
+  }
+
+  commitChanges() {
+    console.log(
+      'commit Intructions : ' +
+        this.selectedVariation.instructions +
+        'to ' +
+        this.selectedPulledVariation.variationTitle +
+        ''
+    );
+    this.selectedPulledVariation.instructions =
+      this.selectedVariation.instructions;
+    this.variationService
+      .updateVariation(this.selectedPulledVariation)
+      .subscribe(
+        (response) => {
+          console.log('Pulled Variation Instructions updated:', response);
+          this.showMainVariation = false;
+        },
+        (error) => {
+          console.error('Error updating variation instructions:', error);
+        }
+      );
   }
 }
