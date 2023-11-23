@@ -9,7 +9,7 @@ import { User } from 'src/app/models/user-dto.model';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = 'http://localhost:5000';
   constructor(
     private router: Router,
     private cookieService: CookieService,

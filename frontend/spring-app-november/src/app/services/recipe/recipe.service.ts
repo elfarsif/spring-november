@@ -8,7 +8,7 @@ import { RecipeDTO } from 'src/app/models/recipe-dto.model';
   providedIn: 'root',
 })
 export class RecipeService {
-  private apiUrl = 'http://localhost:8080/api/recipes';
+  private apiUrl = 'http://localhost:5000/api/recipes';
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 

@@ -13,7 +13,7 @@ import com.spring.springappnovember.utility.JwtUtil;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserService userService;

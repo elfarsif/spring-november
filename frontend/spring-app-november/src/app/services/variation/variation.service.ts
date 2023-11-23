@@ -8,7 +8,7 @@ import { VariationDTO } from 'src/app/models/variation-dto.model';
   providedIn: 'root',
 })
 export class VariationService {
-  private apiUrl = 'http://localhost:8080/variations';
+  private apiUrl = 'http://localhost:5000/variations';
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
