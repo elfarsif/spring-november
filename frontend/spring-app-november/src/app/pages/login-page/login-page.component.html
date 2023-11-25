@@ -22,46 +22,67 @@
     </div>
     <button type="submit">Login</button>
   </form>
+  <div *ngIf="loginFailed">login failed</div>
 </div>
 <button (click)="openRegisterPopup()">Sign Up</button>
-
 <!-- Registration Modal -->
 <div *ngIf="showRegisterModal" class="modal">
   <div class="modal-content">
     <span class="close" (click)="closeRegisterPopup()">&times;</span>
     <h3>Register New User</h3>
-    <form (ngSubmit)="registerNewUser()">
+    <form [formGroup]="registerForm" (ngSubmit)="registerNewUser()">
+      <!-- Username Field -->
       <div>
         <label for="newUsername">Username:</label>
-        <input
-          type="text"
-          id="newUsername"
-          [(ngModel)]="newUserUsername"
-          name="newUsername"
-          required
-        />
+        <input type="text" id="newUsername" formControlName="newUserUsername" />
+        <div
+          *ngIf="registerForm.get('newUserUsername')?.errors?.['required'] && registerForm.get('newUserUsername')?.touched"
+        >
+          Username is required.
+        </div>
+        <div
+          *ngIf="registerForm.get('newUserUsername')?.errors?.['minlength'] || registerForm.get('newUserUsername')?.errors?.['maxlength']"
+        >
+          Username must be between 2 and 20 characters.
+        </div>
       </div>
+      <!-- Password Field -->
       <div>
         <label for="newPassword">Password:</label>
         <input
           type="password"
           id="newPassword"
-          [(ngModel)]="newUserPassword"
-          name="newPassword"
-          required
+          formControlName="newUserPassword"
         />
+        <div
+          *ngIf="registerForm.get('newUserPassword')?.errors?.['required'] && registerForm.get('newUserPassword')?.touched"
+        >
+          Password is required.
+        </div>
+        <div
+          *ngIf="registerForm.get('newUserPassword')?.errors?.['minlength'] || registerForm.get('newUserPassword')?.errors?.['maxlength']"
+        >
+          Password must be between 2 and 20 characters.
+        </div>
       </div>
+      <!-- Email Field -->
       <div>
         <label for="newEmail">Email:</label>
-        <input
-          type="email"
-          id="newEmail"
-          [(ngModel)]="newUserEmail"
-          name="newEmail"
-          required
-        />
+        <input type="email" id="newEmail" formControlName="newUserEmail" />
+        <div
+          *ngIf="registerForm.get('newUserEmail')?.errors?.['required'] && registerForm.get('newUserEmail')?.touched"
+        >
+          Email is required.
+        </div>
+        <div *ngIf="registerForm.get('newUserEmail')?.errors?.['email']">
+          Please enter a valid email address.
+        </div>
       </div>
-      <button type="submit">Register</button>
+      <!-- Submit Button -->
+      <button type="submit" [disabled]="!registerForm.valid">Register</button>
+      <div *ngIf="registrationFailed">
+        Registration failed, username likely already exists
+      </div>
     </form>
   </div>
 </div>

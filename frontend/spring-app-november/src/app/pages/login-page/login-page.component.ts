@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from 'src/app/models/user-dto.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-page',
@@ -17,12 +18,18 @@ export class LoginPageComponent {
   newUserUsername!: string;
   newUserPassword!: string;
   newUserEmail!: string;
+  registerForm!: FormGroup;
+  loginFailed: boolean = false;
+  registrationFailed: boolean = false;
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private cookieService: CookieService
-  ) {}
+    private cookieService: CookieService,
+    private formBuilder: FormBuilder
+  ) {
+    this.createRegisterForm();
+  }
 
   onSubmit() {
     this.authService.login(this.username, this.password).subscribe(
@@ -39,6 +46,7 @@ export class LoginPageComponent {
       },
       (error) => {
         console.error('Login error', error);
+        this.loginFailed = true;
       }
     );
   }
@@ -63,20 +71,69 @@ export class LoginPageComponent {
   }
 
   registerNewUser(): void {
-    this.authService
-      .postNewUser(
-        this.newUserUsername,
-        this.newUserPassword,
-        this.newUserEmail
-      )
-      .subscribe(
-        (data) => {
-          console.log('User registered', data);
-          this.closeRegisterPopup();
-        },
-        (error) => {
-          console.error('Error registering user', error);
-        }
-      );
+    if (this.registerForm.valid) {
+      this.authService
+        .postNewUser(
+          this.registerForm.value.newUserUsername,
+          this.registerForm.value.newUserPassword,
+          this.registerForm.value.newUserEmail
+        )
+        .subscribe(
+          (data) => {
+            console.log('User registered', data);
+            this.closeRegisterPopup();
+            this.authService
+              .login(
+                this.registerForm.value.newUserUsername,
+                this.registerForm.value.newUserPassword
+              )
+              .subscribe(
+                (data) => {
+                  const userId = this.getUserIdFromToken(data.token);
+                  if (userId != null) {
+                    const userIdStr = userId.toString();
+                    console.log('Logged in!', data);
+                    this.cookieService.set('userId', userIdStr);
+                  } else {
+                    console.error('User ID not found in token');
+                  }
+                  this.router.navigate(['/landing']);
+                },
+                (error) => {
+                  console.error('Login error', error);
+                  this.loginFailed = true;
+                }
+              );
+          },
+          (error) => {
+            console.error('Error registering user', error);
+            this.registrationFailed = true;
+          }
+        );
+    } else {
+      // Handle form invalid case
+    }
+  }
+
+  createRegisterForm() {
+    this.registerForm = this.formBuilder.group({
+      newUserUsername: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(20),
+        ],
+      ],
+      newUserPassword: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(20),
+        ],
+      ],
+      newUserEmail: ['', [Validators.required, Validators.email]],
+    });
   }
 }

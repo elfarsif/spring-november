@@ -25,6 +25,9 @@ export class RecipeListComponent {
   ngOnInit(): void {
     this.loadRecipes();
   }
+  navigateToVariations(recipeId: number) {
+    this.router.navigate(['/variations', recipeId]);
+  }
   loadRecipes() {
     this.recipeService.getRecipeByUsername().subscribe(
       (data) => {

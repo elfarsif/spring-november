@@ -2,11 +2,11 @@
   <h2>My Recipes</h2>
   <ul>
     <li *ngFor="let recipe of recipes">
-      <a [routerLink]="['/variations', recipe.recipeId]">
+      <button (click)="navigateToVariations(recipe.recipeId)">
         {{ recipe.title }}
-      </a>
-      <button (click)="openEditPopup(recipe)">edit</button>
-      <button (click)="removeRecipe(recipe)">Remove</button>
+        <button (click)="openEditPopup(recipe)">edit</button>
+        <button (click)="removeRecipe(recipe)">Remove</button>
+      </button>
     </li>
     <li>
       <button (click)="openPopup()">New Recipe</button>
@@ -18,7 +18,7 @@
 <div *ngIf="showModal" class="modal">
   <div class="modal-content">
     <span class="close" (click)="closePopup()">&times;</span>
-    <p>Enter New Variation Title:</p>
+    <p>Enter New Recipe Title:</p>
     <input type="text" [(ngModel)]="newRecipeTitle" />
     <button (click)="submitNewRecipe()">Submit</button>
   </div>
@@ -28,7 +28,11 @@
   <div class="modal-content">
     <span class="close" (click)="closeEditPopup()">&times;</span>
     <p>Edit Variation Title:</p>
-    <input type="text" [(ngModel)]="newRecipeTitle" />
+    <input
+      type="text"
+      [(ngModel)]="newRecipeTitle"
+      placeholder="{{ selectedRecipe.title }}"
+    />
     <button (click)="updateRecipeTitle()">Submit</button>
   </div>
 </div>

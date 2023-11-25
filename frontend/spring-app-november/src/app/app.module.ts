@@ -9,10 +9,24 @@ import { HttpClientModule } from '@angular/common/http';
 import { RecipeListComponent } from './components/recipe-list/recipe-list.component';
 import { VariationPageComponent } from './pages/variation-page/variation-page.component';
 import { TextComparisonComponent } from './components/text-comparison/text-comparison/text-comparison.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, LandingPageComponent, RecipeListComponent, VariationPageComponent, TextComparisonComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  declarations: [
+    AppComponent,
+    LoginPageComponent,
+    LandingPageComponent,
+    RecipeListComponent,
+    VariationPageComponent,
+    TextComparisonComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
