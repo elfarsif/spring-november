@@ -39,6 +39,7 @@ export class LoginPageComponent {
           const userIdStr = userId.toString();
           console.log('Logged in!', data);
           this.cookieService.set('userId', userIdStr);
+          this.cookieService.set('username', this.username);
         } else {
           console.error('User ID not found in token');
         }
@@ -94,6 +95,7 @@ export class LoginPageComponent {
                     const userIdStr = userId.toString();
                     console.log('Logged in!', data);
                     this.cookieService.set('userId', userIdStr);
+                    this.cookieService.set('username', this.newUserUsername);
                   } else {
                     console.error('User ID not found in token');
                   }

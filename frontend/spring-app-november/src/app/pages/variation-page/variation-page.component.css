@@ -1,0 +1,5 @@
+.dynamic-textarea {
+  width: 50%; /* Half the width of the screen */
+  min-height: 50px; /* Minimum height of the textarea */
+  resize: none; /* Disable manual resizing */
+}

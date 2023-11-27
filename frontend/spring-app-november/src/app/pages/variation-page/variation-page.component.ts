@@ -40,13 +40,18 @@ export class VariationPageComponent {
         this.selectedVariation = this.variations[0];
         this.selectedPulledVariation = this.selectedVariation;
         console.log(this.variations);
+
+        setTimeout(() => this.autoGrowTextZoneOnLoad(), 0);
       },
       (error) => {}
     );
+
     this.getMainVariationByRecipeId();
   }
+
   onSelectVariation(variation: VariationDTO): void {
     this.selectedVariation = variation;
+    this.autoGrowTextZoneOnLoad();
   }
 
   closePopup(): void {
@@ -147,6 +152,7 @@ export class VariationPageComponent {
         console.error('Error updating variation instructions:', error);
       }
     );
+    this.autoGrowTextZoneOnLoad();
   }
   private refreshCurrentRoute() {
     const currentUrl = this.router.url;
@@ -193,5 +199,25 @@ export class VariationPageComponent {
           console.error('Error updating variation instructions:', error);
         }
       );
+  }
+
+  // Add this method to your VariationPageComponent class
+
+  autoGrowTextZone(event: any): void {
+    const textArea = event.target;
+    textArea.style.overflow = 'hidden'; // Ensure no scrollbar appears
+    textArea.style.height = 'auto'; // Reset the height
+    textArea.style.height = textArea.scrollHeight + 'px'; // Set height to match content
+  }
+
+  autoGrowTextZoneOnLoad(): void {
+    setTimeout(() => {
+      const textArea = document.querySelector(
+        '.dynamic-textarea'
+      ) as HTMLTextAreaElement;
+      if (textArea) {
+        this.autoGrowTextZone({ target: textArea });
+      }
+    });
   }
 }

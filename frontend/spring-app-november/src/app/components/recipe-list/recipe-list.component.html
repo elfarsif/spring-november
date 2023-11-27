@@ -4,9 +4,10 @@
     <li *ngFor="let recipe of recipes">
       <button (click)="navigateToVariations(recipe.recipeId)">
         {{ recipe.title }}
-        <button (click)="openEditPopup(recipe)">edit</button>
-        <button (click)="removeRecipe(recipe)">Remove</button>
       </button>
+
+      <button (click)="openEditPopup(recipe)">edit</button>
+      <button (click)="removeRecipe(recipe)">Remove</button>
     </li>
     <li>
       <button (click)="openPopup()">New Recipe</button>
