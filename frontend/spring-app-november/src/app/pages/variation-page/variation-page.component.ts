@@ -24,6 +24,7 @@ export class VariationPageComponent {
   showMainVariation: boolean = false;
 
   newVariationTitle: string = '';
+
   constructor(
     private variationService: VariationService,
     private route: ActivatedRoute,
@@ -54,6 +55,9 @@ export class VariationPageComponent {
     this.autoGrowTextZoneOnLoad();
   }
 
+  navigateToCommitPage() {
+    this.router.navigate(['/commits', this.selectedVariation.variationId]);
+  }
   closePopup(): void {
     this.showModal = false;
   }

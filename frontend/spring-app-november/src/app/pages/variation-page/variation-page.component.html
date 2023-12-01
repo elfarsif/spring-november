@@ -1,79 +1,102 @@
 <div>
-  <h2>My Variations</h2>
-  <ul>
-    <li *ngFor="let variation of variations">
-      <button (click)="onSelectVariation(variation)">
-        {{
-          variation.isMain == true
-            ? "Main variation / " + variation.variationTitle
-            : variation.variationTitle
-        }}
-        <button (click)="openEditPopup(variation)">Edit Title</button>
-        <button (click)="removeVariation(variation)">Remove</button>
-      </button>
-    </li>
-    <li>
-      <button (click)="openPopup()">New Variation</button>
-    </li>
-  </ul>
-</div>
-
-<div *ngIf="selectedVariation">
-  <h3>Instructions for {{ selectedVariation.variationTitle }}</h3>
-  <!-- <button (click)="openPullPopup()">Compare Varition</button> -->
+  <div>Recipe title</div>
+  <app-branch-dropdown></app-branch-dropdown>
   <div>
-    <button (click)="compareToMain()">Compare to Main Variation</button>
+    text header LAST COMMIT MESSAGE (REsons for changes message)
+    <button (click)="navigateToCommitPage()">Past commits</button>
   </div>
+  <app-diff-checker
+    [text1]="selectedVariation.instructions"
+    [text2]="selectedPulledVariation.instructions"
+  ></app-diff-checker>
 
-  <textarea
-    [(ngModel)]="selectedVariation.instructions"
-    (blur)="updateInstructions()"
-    (input)="autoGrowTextZone($event)"
-    class="dynamic-textarea"
-  ></textarea>
-
-  <div *ngIf="showMainVariation">
-    <app-text-comparison
-      [text1]="selectedVariation.instructions"
-      [text2]="selectedPulledVariation.instructions"
-    ></app-text-comparison>
-    <button (click)="commitChanges()">Commit changes to Main</button>
+  <div>
+    Recipe Results:
+    <textarea name="" id="" cols="30" rows="3">overcooked too sweet</textarea>
+    commit message/changes implemented :
+    <textarea name="" id="" cols="30" rows="3">
+reduced cooking time, reduced sugar</textarea
+    >
   </div>
 </div>
-<!-- Modal for new variation -->
-<div *ngIf="showModal" class="modal">
-  <div class="modal-content">
-    <span class="close" (click)="closePopup()">&times;</span>
-    <p>Enter New Variation Title:</p>
-    <input type="text" [(ngModel)]="newVariationTitle" />
-    <button (click)="submitNewVariation()">Submit</button>
-  </div>
-</div>
-<!-- Modal for update variation title -->
-<div *ngIf="showEditModal" class="modal">
-  <div class="modal-content">
-    <span class="close" (click)="closeEditPopup()">&times;</span>
-    <p>Edit Variation Title:</p>
-    <input type="text" [(ngModel)]="newVariationTitle" />
-    <button (click)="updateVariationTitle()">Submit</button>
-  </div>
-</div>
-<!-- Modal for pull function -->
-<div *ngIf="showPullModal" class="modal">
-  <div class="modal-content">
-    <span class="close" (click)="closePullPopup()">&times;</span>
-    <p>What variation do you want to compare to?</p>
+<div>
+  <div>
+    <h2>My Variations</h2>
     <ul>
       <li *ngFor="let variation of variations">
-        <button (click)="setPulledVariation(variation)">
+        <button (click)="onSelectVariation(variation)">
           {{
             variation.isMain == true
               ? "Main variation / " + variation.variationTitle
               : variation.variationTitle
           }}
+          <button (click)="openEditPopup(variation)">Edit Title</button>
+          <button (click)="removeVariation(variation)">Remove</button>
         </button>
       </li>
-      <button (click)="commitChanges()">Commit changes to Variation</button>
+      <li>
+        <button (click)="openPopup()">New Variation</button>
+      </li>
     </ul>
+  </div>
+
+  <div *ngIf="selectedVariation">
+    <h3>Instructions for {{ selectedVariation.variationTitle }}</h3>
+    <!-- <button (click)="openPullPopup()">Compare Varition</button> -->
+    <div>
+      <button (click)="compareToMain()">Compare to Main Variation</button>
+    </div>
+
+    <textarea
+      [(ngModel)]="selectedVariation.instructions"
+      (blur)="updateInstructions()"
+      (input)="autoGrowTextZone($event)"
+      class="dynamic-textarea"
+    ></textarea>
+
+    <div *ngIf="showMainVariation">
+      <app-text-comparison
+        [text1]="selectedVariation.instructions"
+        [text2]="selectedPulledVariation.instructions"
+      ></app-text-comparison>
+      <button (click)="commitChanges()">Commit changes to Main</button>
+    </div>
+  </div>
+  <!-- Modal for new variation -->
+  <div *ngIf="showModal" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="closePopup()">&times;</span>
+      <p>Enter New Variation Title:</p>
+      <input type="text" [(ngModel)]="newVariationTitle" />
+      <button (click)="submitNewVariation()">Submit</button>
+    </div>
+  </div>
+  <!-- Modal for update variation title -->
+  <div *ngIf="showEditModal" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="closeEditPopup()">&times;</span>
+      <p>Edit Variation Title:</p>
+      <input type="text" [(ngModel)]="newVariationTitle" />
+      <button (click)="updateVariationTitle()">Submit</button>
+    </div>
+  </div>
+  <!-- Modal for pull function -->
+  <div *ngIf="showPullModal" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="closePullPopup()">&times;</span>
+      <p>What variation do you want to compare to?</p>
+      <ul>
+        <li *ngFor="let variation of variations">
+          <button (click)="setPulledVariation(variation)">
+            {{
+              variation.isMain == true
+                ? "Main variation / " + variation.variationTitle
+                : variation.variationTitle
+            }}
+          </button>
+        </li>
+        <button (click)="commitChanges()">Commit changes to Variation</button>
+      </ul>
+    </div>
   </div>
 </div>

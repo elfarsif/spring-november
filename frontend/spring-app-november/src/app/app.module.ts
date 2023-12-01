@@ -10,6 +10,11 @@ import { RecipeListComponent } from './components/recipe-list/recipe-list.compon
 import { VariationPageComponent } from './pages/variation-page/variation-page.component';
 import { TextComparisonComponent } from './components/text-comparison/text-comparison/text-comparison.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
+import { DiffCheckerComponent } from './components/diff-checker/diff-checker.component';
+import { BranchDropdownComponent } from './components/branch-dropdown/branch-dropdown.component';
+import { CommitPageComponent } from './pages/commit-page/commit-page.component';
+import { RepositoryPageComponent } from './pages/repository-page/repository-page.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +24,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     RecipeListComponent,
     VariationPageComponent,
     TextComparisonComponent,
+    DiffCheckerComponent,
+    BranchDropdownComponent,
+    CommitPageComponent,
+    RepositoryPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,6 +35,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MonacoEditorModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

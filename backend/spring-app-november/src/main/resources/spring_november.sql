@@ -28,6 +28,14 @@ CREATE TABLE variations (
     FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id) ON DELETE CASCADE
 );
 
+CREATE TABLE commits (
+    commit_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    variation_id INT NOT NULL,
+    commit_message VARCHAR(255) NOT NULL,
+    commit_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (variation_id) REFERENCES variations(variation_id) ON DELETE CASCADE
+);
+
 
 INSERT INTO users (username, password, email) VALUES ('u1', 'p1', 'alice@example.com');
 INSERT INTO users (username, password, email) VALUES ('u2', 'p2', 'bob@example.net');
@@ -75,6 +83,21 @@ INSERT INTO variations (recipe_id, variation_title, instructions, is_main)
 VALUES 
 ((SELECT recipe_id FROM recipes WHERE title = 'Quinoa Salad'), 'Mediterranean Quinoa Salad', 'Instructions for Mediterranean-style quinoa salad.',1),
 ((SELECT recipe_id FROM recipes WHERE title = 'Quinoa Salad'), 'Mexican Quinoa Salad', 'Instructions for Mexican-style quinoa salad.',0);
+
+-- Insert commits for 'Classic Style' variation of 'Chocolate Chip Cookies'
+INSERT INTO commits (variation_id, commit_message) 
+VALUES 
+((SELECT variation_id FROM variations WHERE variation_title = 'Classic Style'), 'Initial recipe creation');
+
+INSERT INTO commits (variation_id, commit_message) 
+VALUES 
+((SELECT variation_id FROM variations WHERE variation_title = 'Classic Style'), 'Adjusted sugar quantity');
+
+-- Insert commits for 'Nutty Variation' of 'Chocolate Chip Cookies'
+INSERT INTO commits (variation_id, commit_message) 
+VALUES 
+((SELECT variation_id FROM variations WHERE variation_title = 'Nutty Variation'), 'Added nuts to recipe');
+
 
 
 commit;

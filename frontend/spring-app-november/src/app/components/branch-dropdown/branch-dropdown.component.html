@@ -1,0 +1,10 @@
+<h6>branches</h6>
+<select
+  class="variation-dropdown form-control"
+  *ngIf="variations && variations.length"
+>
+  <option *ngFor="let variation of variations" [value]="variation.variationId">
+    {{ variation.variationTitle }}
+  </option>
+</select>
+<button>add branch</button>
