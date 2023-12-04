@@ -43,6 +43,11 @@ public class CommitController {
         List<CommitDto> commits = commitService.getCommitsByVariationId(variationId);
         return ResponseEntity.ok(commits);
     }
+    
+    @GetMapping("/latest/{variationId}")
+    public CommitDto getLatestCommitByVariationId(@PathVariable Integer variationId) {
+        return commitService.getLatestCommitByVariationId(variationId);
+    }
 
 }
 

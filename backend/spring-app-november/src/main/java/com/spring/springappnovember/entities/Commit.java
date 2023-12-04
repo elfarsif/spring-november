@@ -23,6 +23,12 @@ public class Commit {
     
     @Column(name = "commit_message")
     private String message;
+    
+    @Column(name = "instructions")
+    private String instructions;
+    
+    @Column(name = "results")
+    private String results;
 
     @Column(name = "commit_timestamp")
     private LocalDateTime timestamp; 

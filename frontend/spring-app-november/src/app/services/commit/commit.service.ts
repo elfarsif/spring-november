@@ -24,4 +24,39 @@ export class CommitService {
       headers,
     });
   }
+
+  addNewCommit(
+    variationId: number,
+    message: string,
+    instructions: string,
+    results: string
+  ) {
+    const token = this.cookieService.get('token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    const currentDate = new Date();
+    let timestamp = currentDate.toISOString();
+    const payload = {
+      variationId: variationId,
+      message: message,
+      results: results,
+      instructions: instructions,
+      timestamp: timestamp,
+    };
+    return this.http.post<any>(`${this.apiUrl}`, payload, { headers });
+  }
+
+  getLatestCommitByVariationId(variationId: number) {
+    const token = this.cookieService.get('token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get<CommitDTO>(`${this.apiUrl}/latest/${variationId}`, {
+      headers,
+    });
+  }
 }

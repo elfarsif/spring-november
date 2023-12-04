@@ -15,6 +15,8 @@ import { DiffCheckerComponent } from './components/diff-checker/diff-checker.com
 import { BranchDropdownComponent } from './components/branch-dropdown/branch-dropdown.component';
 import { CommitPageComponent } from './pages/commit-page/commit-page.component';
 import { RepositoryPageComponent } from './pages/repository-page/repository-page.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { RepositoryPageComponent } from './pages/repository-page/repository-page
     HttpClientModule,
     ReactiveFormsModule,
     MonacoEditorModule.forRoot(),
+    NoopAnimationsModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

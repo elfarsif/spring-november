@@ -66,5 +66,19 @@ public class CommitServiceImpl implements CommitService {
                 .collect(Collectors.toList());
     }
     
+    @Override
+    public CommitDto getLatestCommitByVariationId(Integer variationId) {
+        List<Commit> commits = commitRepository.findLatestCommitByVariationId(variationId);
+        try {
+        	CommitDto dto = new CommitDto();
+            BeanUtils.copyProperties(commits.get(0),dto);
+
+        	System.out.println("COMMIT CONTROLLER :::"+dto);
+            return dto;
+        } catch (Exception e) {
+            // Handle or log the exception as appropriate
+            throw new RuntimeException("Error converting to DTO", e);
+        }
+    }
 
 }

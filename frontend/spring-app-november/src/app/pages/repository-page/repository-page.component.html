@@ -1,1 +1,23 @@
-<p>repository-page works!</p>
+<div>
+  <div>{{ recipeTitle }}</div>
+  <app-branch-dropdown
+    (variationChange)="onVariationSelected($event)"
+  ></app-branch-dropdown>
+  <div>
+    LAST COMMIT MESSAGE (REsons for changes message)
+    <button (click)="navigateToCommitPage()">Past commits</button>
+  </div>
+  <app-diff-checker
+    #diffCheckerComponent
+    (addCommitMessage)="promptCommit()"
+    [selectedVariationInstructions]="selectedVariationInstructions"
+    [text1]="selectedVariation"
+  ></app-diff-checker>
+
+  <div *ngIf="showCommitModal">
+    commit message/changes implemented :
+    <input type="text" [(ngModel)]="commitMessage" />
+    <button (click)="hideCommitModal()">commit</button>
+  </div>
+</div>
+<button>Delete Branch</button>

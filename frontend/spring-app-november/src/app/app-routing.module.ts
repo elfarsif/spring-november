@@ -5,6 +5,7 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { AuthGuard } from './guards/auth.guard';
 import { VariationPageComponent } from './pages/variation-page/variation-page.component';
 import { CommitPageComponent } from './pages/commit-page/commit-page.component';
+import { RepositoryPageComponent } from './pages/repository-page/repository-page.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -15,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'variations/:id',
-    component: VariationPageComponent,
+    component: RepositoryPageComponent,
     canActivate: [AuthGuard],
   },
   {

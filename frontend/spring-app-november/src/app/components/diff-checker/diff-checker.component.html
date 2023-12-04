@@ -1,5 +1,4 @@
 <div class="container-fluid container-diff">
-  <h1>Text Compare</h1>
   <div *ngIf="isCompared" class="row">
     <div class="col-md-12">
       <form class="form-inline" role="form">
@@ -39,12 +38,12 @@
     </div> -->
     <div class="col-md-6">
       <div class="input-title">
-        <label>Changed Text</label>
+        <label>Recipe</label>
       </div>
       <ngx-monaco-editor
         id="editor2"
         [options]="inputOptions"
-        [(ngModel)]="text2"
+        [(ngModel)]="latestCommitInstructions"
       ></ngx-monaco-editor>
     </div>
   </div>
@@ -55,6 +54,14 @@
       </button>
     </div>
   </div>
+
+  Recipe Results:
+  <textarea [(ngModel)]="results" cols="30" rows="3">
+overcooked too sweet</textarea
+  >
 </div>
+<br />
+<br />
+<button (click)="promptCommit()">commit/save changes</button>
 <br />
 <br />

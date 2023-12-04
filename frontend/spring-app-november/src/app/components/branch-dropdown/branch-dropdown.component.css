@@ -1,3 +1,38 @@
-.variation-dropdown {
-  width: 300px;
+.custom-dropdown {
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: white;
+  width: 200px; /* Adjust as needed */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+.dropdown-header {
+  cursor: pointer;
+  padding: 5px;
+}
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-top: none; /* Since it's connected to the header */
+}
+.dropdown-list div {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.dropdown-list div:hover, .dropdown-list button:hover {
+  background-color: #f8f8f8;
+}
+
+.dropdown-list button {
+  width: 100%;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  padding: 5px;
 }

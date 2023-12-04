@@ -8,8 +8,7 @@ import { VariationDTO } from 'src/app/models/variation-dto.model';
   providedIn: 'root',
 })
 export class VariationService {
-  private apiUrl =
-    'http://spring-6-env.eba-yauywiv3.us-east-2.elasticbeanstalk.com/variations';
+  private apiUrl = 'http://localhost:5000/variations';
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 

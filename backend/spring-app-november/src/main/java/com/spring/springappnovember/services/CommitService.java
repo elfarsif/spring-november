@@ -5,6 +5,7 @@ package com.spring.springappnovember.services;
 import java.util.List;
 
 import com.spring.springappnovember.dtos.CommitDto;
+import com.spring.springappnovember.entities.Commit;
 
 public interface CommitService {
     CommitDto createCommit(CommitDto commitDto);
@@ -12,4 +13,5 @@ public interface CommitService {
     CommitDto getCommitById(Long commitId);
     List<CommitDto> getCommitsByVariationId(Integer variationId);
     // Additional methods as needed
+	CommitDto getLatestCommitByVariationId(Integer variationId);
 }

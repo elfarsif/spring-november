@@ -8,8 +8,7 @@ import { RecipeDTO } from 'src/app/models/recipe-dto.model';
   providedIn: 'root',
 })
 export class RecipeService {
-  private apiUrl =
-    'http://spring-6-env.eba-yauywiv3.us-east-2.elasticbeanstalk.com/api/recipes';
+  private apiUrl = 'http://localhost:5000/api/recipes';
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 

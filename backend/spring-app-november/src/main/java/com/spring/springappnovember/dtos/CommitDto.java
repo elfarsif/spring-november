@@ -10,6 +10,8 @@ public class CommitDto {
     private Long commitId;
     private Integer variationId;
     private String message;
+    private String instructions;
+    private String results;
     private LocalDateTime timestamp;
 
     // Constructors, Getters, and Setters

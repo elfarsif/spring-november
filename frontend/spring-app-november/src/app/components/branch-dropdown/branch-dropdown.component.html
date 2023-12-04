@@ -1,10 +1,24 @@
-<h6>branches</h6>
-<select
-  class="variation-dropdown form-control"
-  *ngIf="variations && variations.length"
->
-  <option *ngFor="let variation of variations" [value]="variation.variationId">
-    {{ variation.variationTitle }}
-  </option>
-</select>
-<button>add branch</button>
+<div class="custom-dropdown">
+  <div class="dropdown-header" (click)="toggleDropdown()">Main</div>
+  <div class="dropdown-list" *ngIf="isOpen">
+    <div
+      *ngFor="let variation of variations"
+      (click)="selectVariation(variation)"
+    >
+      {{ variation.variationTitle }}
+    </div>
+    <button *ngIf="!addBranchInput" (click)="revealBranchInput()">
+      Add Branch
+    </button>
+    <div *ngIf="addBranchInput">
+      <input type="text" [(ngModel)]="newBranchName" />
+      <button (click)="addBranch()">add</button>
+      <button (click)="addBranchInput = !addBranchInput">x</button>
+    </div>
+  </div>
+</div>
+<ng-template #dialogTemplate>
+  <h2>Dialog Content</h2>
+  <p>Your dialog content goes here.</p>
+  <!-- You can add more content here -->
+</ng-template>
