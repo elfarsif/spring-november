@@ -4,7 +4,8 @@
     (variationChange)="onVariationSelected($event)"
   ></app-branch-dropdown>
   <div>
-    LAST COMMIT MESSAGE (REsons for changes message)
+    {{ latestCommit.message }}
+    because {{ latestCommit.results }}
     <button (click)="navigateToCommitPage()">Past commits</button>
   </div>
   <app-diff-checker

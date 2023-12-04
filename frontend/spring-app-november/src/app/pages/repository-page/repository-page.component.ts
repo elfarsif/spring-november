@@ -23,7 +23,14 @@ export class RepositoryPageComponent implements OnInit {
   selectedPulledVariation!: VariationDTO;
   showCommitModal: boolean = false;
   commitMessage!: string;
-  latestCommit!: CommitDTO;
+  latestCommit: CommitDTO = {
+    commitId: 0,
+    variationId: 0,
+    message: '',
+    timestamp: '',
+    results: '',
+    instructions: '',
+  };
   @ViewChild('diffCheckerComponent')
   diffCheckerComponent!: DiffCheckerComponent;
   recipeTitle!: string;
@@ -92,6 +99,7 @@ export class RepositoryPageComponent implements OnInit {
 
   hideCommitModal() {
     this.showCommitModal = false;
+
     if (this.diffCheckerComponent) {
       this.diffCheckerComponent.addNewCommit(this.commitMessage);
     }
@@ -104,6 +112,7 @@ export class RepositoryPageComponent implements OnInit {
         (data) => {
           this.latestCommit = data;
           this.sharedService.setLatestCommit(data);
+          console.log('repo page', this.latestCommit);
         },
         (error) => {
           console.log(error);

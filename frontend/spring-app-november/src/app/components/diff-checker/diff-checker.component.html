@@ -43,20 +43,20 @@
       <ngx-monaco-editor
         id="editor2"
         [options]="inputOptions"
-        [(ngModel)]="latestCommitInstructions"
+        [(ngModel)]="newCommit!.instructions"
       ></ngx-monaco-editor>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12" style="text-align: center">
       <button type="button" class="btn btn-primary" (click)="onCompare()">
-        compare to latest version
+        compare to last version
       </button>
     </div>
   </div>
 
   Recipe Results:
-  <textarea [(ngModel)]="results" cols="30" rows="3">
+  <textarea [(ngModel)]="newCommit.results" cols="30" rows="3">
 overcooked too sweet</textarea
   >
 </div>

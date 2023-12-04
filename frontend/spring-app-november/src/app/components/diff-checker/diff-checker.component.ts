@@ -54,7 +54,22 @@ export class DiffCheckerComponent implements OnInit {
   };
 
   selectedVariation2: any;
-  latestCommitInstructions!: string | undefined;
+  newCommit: CommitDTO = {
+    commitId: 0,
+    variationId: 0,
+    message: '',
+    timestamp: '',
+    results: '',
+    instructions: '',
+  };
+  lastCommit: CommitDTO = {
+    commitId: 0,
+    variationId: 0,
+    message: '',
+    timestamp: '',
+    results: '',
+    instructions: '',
+  };
 
   constructor(
     private commitService: CommitService,
@@ -63,9 +78,12 @@ export class DiffCheckerComponent implements OnInit {
   ngOnInit(): void {
     this.sharedService.selectedVariation$.subscribe((variation) => {
       this.selectedVariation2 = variation;
+      console.log('in diff checker', this.selectedVariation2);
     });
     this.sharedService.latestCommit$.subscribe((commit) => {
-      this.latestCommitInstructions = commit?.instructions;
+      if (commit) {
+        this.newCommit = commit;
+      }
       console.log('latest commit in diff-checker:', commit);
     });
   }
@@ -87,23 +105,36 @@ export class DiffCheckerComponent implements OnInit {
   }
 
   onCompare() {
-    this.originalModel = Object.assign({}, this.originalModel, {
-      code: this.text1,
-    });
-    this.modifiedModel = Object.assign({}, this.originalModel, {
-      code: this.selectedVariation,
-    });
-    this.isCompared = !this.isCompared;
-    window.scrollTo(0, 0); // scroll the window to top
+    this.commitService
+      .getCommitsByVariation(this.newCommit.variationId)
+      .subscribe(
+        (data) => {
+          if (data.length > 1) {
+            this.lastCommit = data[data.length - 2];
+
+            this.originalModel = Object.assign({}, this.originalModel, {
+              code: this.lastCommit.instructions,
+            });
+            this.modifiedModel = Object.assign({}, this.originalModel, {
+              code: this.newCommit.instructions,
+            });
+            this.isCompared = !this.isCompared;
+            window.scrollTo(0, 0); // scroll the window to top
+          }
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
   }
 
   addNewCommit(commitMessage: string) {
     this.commitService
       .addNewCommit(
-        this.selectedVariation.variationId,
+        this.newCommit.variationId,
         commitMessage,
-        this.selectedVariation.instructions,
-        this.results
+        this.newCommit.instructions,
+        this.newCommit.results
       )
       .subscribe(
         (data) => {
