@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { RecipeDTO } from 'src/app/models/recipe-dto.model';
 import { RecipeService } from 'src/app/services/recipe/recipe.service';
 import { VariationService } from 'src/app/services/variation/variation.service';
+import { NewRecipeDialogComponent } from '../new-recipe-dialog/new-recipe-dialog.component';
 
 @Component({
   selector: 'app-recipe-list',
@@ -13,14 +15,15 @@ import { VariationService } from 'src/app/services/variation/variation.service';
 export class RecipeListComponent {
   recipes!: RecipeDTO[];
   selectedRecipe!: RecipeDTO;
-  showModal: boolean = false;
+  showModal: boolean = true;
   showEditModal: boolean = false;
   newRecipeTitle: string = '';
   constructor(
     private recipeService: RecipeService,
     private router: Router,
     private variationService: VariationService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private dialog: MatDialog
   ) {}
   ngOnInit(): void {
     this.loadRecipes();
@@ -59,7 +62,12 @@ export class RecipeListComponent {
     this.showModal = false;
   }
   openPopup(): void {
-    this.showModal = true;
+    const dialogRef = this.dialog.open(NewRecipeDialogComponent);
+
+    // You can subscribe to events like after the dialog is closed
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
   openEditPopup(recipe: RecipeDTO): void {
     this.showEditModal = true;

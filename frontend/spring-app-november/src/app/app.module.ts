@@ -17,7 +17,17 @@ import { CommitPageComponent } from './pages/commit-page/commit-page.component';
 import { RepositoryPageComponent } from './pages/repository-page/repository-page.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { NewRecipeDialogComponent } from './components/new-recipe-dialog/new-recipe-dialog.component';
+import { NewVariationDialogComponent } from './components/dialog/new-variation-dialog/new-variation-dialog.component';
+import { MaterialModule } from './modules/material/material.module';
+import { SignupPageComponent } from './pages/signup-page/signup-page.component';
+import { HeaderComponent } from './components/header/header.component';
+import { MainContentPageComponent } from './pages/main-content-page/main-content-page.component';
+import { LoggedInLayoutComponent } from './layouts/logged-in-layout/logged-in-layout.component';
+import { AssignedPageComponent } from './layouts/assigned-page/assigned-page.component';
+import { ContentPageComponent } from './layouts/content-page/content-page.component';
+import { RecipeCardListComponent } from './components/recipe-card-list/recipe-card-list.component';
+import { RecipeList3Component } from './components/recipe-list-3/recipe-list-3.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +40,16 @@ import { MatDialogModule } from '@angular/material/dialog';
     BranchDropdownComponent,
     CommitPageComponent,
     RepositoryPageComponent,
+    NewRecipeDialogComponent,
+    NewVariationDialogComponent,
+    SignupPageComponent,
+    HeaderComponent,
+    MainContentPageComponent,
+    LoggedInLayoutComponent,
+    AssignedPageComponent,
+    ContentPageComponent,
+    RecipeCardListComponent,
+    RecipeList3Component,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +60,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MonacoEditorModule.forRoot(),
     NoopAnimationsModule,
     MatDialogModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

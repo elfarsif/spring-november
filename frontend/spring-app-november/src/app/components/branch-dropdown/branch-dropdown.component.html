@@ -1,24 +1,10 @@
-<div class="custom-dropdown">
-  <div class="dropdown-header" (click)="toggleDropdown()">Main</div>
-  <div class="dropdown-list" *ngIf="isOpen">
-    <div
+<mat-form-field>
+  <mat-select [value]="selectedVariationTitle">
+    <mat-option
       *ngFor="let variation of variations"
+      [value]="variation.variationTitle"
       (click)="selectVariation(variation)"
-    >
-      {{ variation.variationTitle }}
-    </div>
-    <button *ngIf="!addBranchInput" (click)="revealBranchInput()">
-      Add Branch
-    </button>
-    <div *ngIf="addBranchInput">
-      <input type="text" [(ngModel)]="newBranchName" />
-      <button (click)="addBranch()">add</button>
-      <button (click)="addBranchInput = !addBranchInput">x</button>
-    </div>
-  </div>
-</div>
-<ng-template #dialogTemplate>
-  <h2>Dialog Content</h2>
-  <p>Your dialog content goes here.</p>
-  <!-- You can add more content here -->
-</ng-template>
+      >{{ variation.variationTitle }}</mat-option
+    ><button mat-stroked-button (click)="openDialog()">New Variation</button>
+  </mat-select>
+</mat-form-field>

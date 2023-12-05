@@ -6,17 +6,17 @@
         {{ recipe.title }}
       </button>
 
-      <button (click)="openEditPopup(recipe)">edit</button>
-      <button (click)="removeRecipe(recipe)">Remove</button>
+      <!-- <button (click)="openEditPopup(recipe)">edit</button>
+      <button (click)="removeRecipe(recipe)">Remove</button> -->
     </li>
     <li>
-      <button (click)="openPopup()">New Recipe</button>
+      <button mat-button (click)="openPopup()">New Recipe</button>
     </li>
   </ul>
 </div>
-
 <!-- Modal for new variation -->
 <div *ngIf="showModal" class="modal">
+  yoyo
   <div class="modal-content">
     <span class="close" (click)="closePopup()">&times;</span>
     <p>Enter New Recipe Title:</p>

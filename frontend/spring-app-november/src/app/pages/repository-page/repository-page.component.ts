@@ -69,10 +69,6 @@ export class RepositoryPageComponent implements OnInit {
     );
   }
 
-  navigateToCommitPage() {
-    this.router.navigate(['/commits', this.selectedVariation.variationId]);
-  }
-
   getMainVariationByRecipeId() {
     this.variationService.getMainVariationByRecipeId(this.recipeId).subscribe(
       (data) => {
@@ -112,7 +108,6 @@ export class RepositoryPageComponent implements OnInit {
         (data) => {
           this.latestCommit = data;
           this.sharedService.setLatestCommit(data);
-          console.log('repo page', this.latestCommit);
         },
         (error) => {
           console.log(error);

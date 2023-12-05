@@ -1,0 +1,12 @@
+<h1>My Recipes</h1>
+<mat-list role="list">
+  <mat-list-item role="listitem" *ngFor="let recipe of recipes">
+    <button
+      mat-button
+      [routerLink]="['/dashboard/variations', recipe.recipeId]"
+    >
+      {{ recipe.title }}
+    </button>
+  </mat-list-item>
+</mat-list>
+<button mat-raised-button color="primary">New Recipe</button>

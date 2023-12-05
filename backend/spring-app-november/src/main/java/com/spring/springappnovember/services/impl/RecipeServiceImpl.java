@@ -2,7 +2,9 @@ package com.spring.springappnovember.services.impl;
 
 import com.spring.springappnovember.dtos.RecipeDto;
 import com.spring.springappnovember.entities.Recipe;
+import com.spring.springappnovember.entities.Variation;
 import com.spring.springappnovember.repositories.RecipeRepository;
+import com.spring.springappnovember.repositories.VariationRepository;
 import com.spring.springappnovember.services.RecipeService;
 import com.spring.springappnovember.services.VariationService;
 
@@ -17,12 +19,15 @@ import java.util.stream.Collectors;
 public class RecipeServiceImpl implements RecipeService {
 
     private final RecipeRepository recipeRepository;
+    private final VariationRepository variationRepository;
     
 
     @Autowired
-    public RecipeServiceImpl(RecipeRepository recipeRepository) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository, VariationRepository variationRepository) {
         this.recipeRepository = recipeRepository;
+		this.variationRepository = variationRepository;
     }
+    
     
     @Override
     public List<RecipeDto> getRecipesByUserId(Long userId) {
@@ -41,10 +46,23 @@ public class RecipeServiceImpl implements RecipeService {
     
     @Override
     public RecipeDto createRecipe(RecipeDto recipeDto) {
+    	
         Recipe recipe = new Recipe();
         BeanUtils.copyProperties(recipeDto, recipe);
         recipe = recipeRepository.save(recipe);
         BeanUtils.copyProperties(recipe, recipeDto);
+    	//add new main variation when u create a recipe
+    	Variation variation = new Variation();
+    	variation.setVariationTitle("main");
+    	variation.setInstructions("");
+    	variation.setRecipe(recipe);
+        variation.setIsMain(true);
+        Variation variationReturned=variationRepository.save(variation);
+        
+        
+        System.out.println("New variation created with recipe"+variationReturned);
+        
+        
         return recipeDto;
     }
 

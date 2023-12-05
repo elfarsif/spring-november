@@ -5,10 +5,6 @@
     text header LAST COMMIT MESSAGE (REsons for changes message)
     <button (click)="navigateToCommitPage()">Past commits</button>
   </div>
-  <!-- <app-diff-checker
-    [text1]="selectedVariation.instructions"
-    [text2]="selectedPulledVariation.instructions"
-  ></app-diff-checker> -->
 
   <div>
     Recipe Results:
@@ -60,43 +56,6 @@ reduced cooking time, reduced sugar</textarea
         [text2]="selectedPulledVariation.instructions"
       ></app-text-comparison>
       <button (click)="commitChanges()">Commit changes to Main</button>
-    </div>
-  </div>
-  <!-- Modal for new variation -->
-  <div *ngIf="showModal" class="modal">
-    <div class="modal-content">
-      <span class="close" (click)="closePopup()">&times;</span>
-      <p>Enter New Variation Title:</p>
-      <input type="text" [(ngModel)]="newVariationTitle" />
-      <button (click)="submitNewVariation()">Submit</button>
-    </div>
-  </div>
-  <!-- Modal for update variation title -->
-  <div *ngIf="showEditModal" class="modal">
-    <div class="modal-content">
-      <span class="close" (click)="closeEditPopup()">&times;</span>
-      <p>Edit Variation Title:</p>
-      <input type="text" [(ngModel)]="newVariationTitle" />
-      <button (click)="updateVariationTitle()">Submit</button>
-    </div>
-  </div>
-  <!-- Modal for pull function -->
-  <div *ngIf="showPullModal" class="modal">
-    <div class="modal-content">
-      <span class="close" (click)="closePullPopup()">&times;</span>
-      <p>What variation do you want to compare to?</p>
-      <ul>
-        <li *ngFor="let variation of variations">
-          <button (click)="setPulledVariation(variation)">
-            {{
-              variation.isMain == true
-                ? "Main variation / " + variation.variationTitle
-                : variation.variationTitle
-            }}
-          </button>
-        </li>
-        <button (click)="commitChanges()">Commit changes to Variation</button>
-      </ul>
     </div>
   </div>
 </div>

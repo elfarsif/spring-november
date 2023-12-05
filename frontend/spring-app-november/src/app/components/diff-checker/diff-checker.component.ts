@@ -78,13 +78,11 @@ export class DiffCheckerComponent implements OnInit {
   ngOnInit(): void {
     this.sharedService.selectedVariation$.subscribe((variation) => {
       this.selectedVariation2 = variation;
-      console.log('in diff checker', this.selectedVariation2);
     });
     this.sharedService.latestCommit$.subscribe((commit) => {
       if (commit) {
         this.newCommit = commit;
       }
-      console.log('latest commit in diff-checker:', commit);
     });
   }
 

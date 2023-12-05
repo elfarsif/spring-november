@@ -1,0 +1,8 @@
+<form (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>Input Field</mat-label>
+    <input matInput [(ngModel)]="newBranchName" name="inputField" required />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+</form>

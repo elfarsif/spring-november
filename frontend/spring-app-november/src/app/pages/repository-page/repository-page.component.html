@@ -1,12 +1,20 @@
 <div>
-  <div>{{ recipeTitle }}</div>
+  <div>
+    <h1>
+      {{ recipeTitle }}
+    </h1>
+  </div>
   <app-branch-dropdown
     (variationChange)="onVariationSelected($event)"
   ></app-branch-dropdown>
   <div>
-    {{ latestCommit.message }}
-    because {{ latestCommit.results }}
-    <button (click)="navigateToCommitPage()">Past commits</button>
+    {{ latestCommit.message }} because {{ latestCommit.results }}
+    <button
+      mat-button
+      [routerLink]="['/commits', this.selectedVariation.variationId]"
+    >
+      Past commits
+    </button>
   </div>
   <app-diff-checker
     #diffCheckerComponent

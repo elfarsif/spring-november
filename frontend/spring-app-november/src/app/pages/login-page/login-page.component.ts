@@ -11,8 +11,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login-page.component.css'],
 })
 export class LoginPageComponent {
-  username!: string;
-  password!: string;
+  username: string = '';
+  password: string = '';
 
   showRegisterModal: boolean = false;
   newUserUsername!: string;
@@ -27,9 +27,7 @@ export class LoginPageComponent {
     private router: Router,
     private cookieService: CookieService,
     private formBuilder: FormBuilder
-  ) {
-    this.createRegisterForm();
-  }
+  ) {}
 
   onSubmit() {
     this.authService.login(this.username, this.password).subscribe(
@@ -43,7 +41,7 @@ export class LoginPageComponent {
         } else {
           console.error('User ID not found in token');
         }
-        this.router.navigate(['/landing']);
+        this.router.navigate(['/dashboard/landing']);
       },
       (error) => {
         console.error('Login error', error);
@@ -61,81 +59,5 @@ export class LoginPageComponent {
       console.error('Error parsing token', error);
       return null;
     }
-  }
-
-  openRegisterPopup(): void {
-    this.showRegisterModal = true;
-  }
-
-  closeRegisterPopup(): void {
-    this.showRegisterModal = false;
-  }
-
-  registerNewUser(): void {
-    if (this.registerForm.valid) {
-      this.authService
-        .postNewUser(
-          this.registerForm.value.newUserUsername,
-          this.registerForm.value.newUserPassword,
-          this.registerForm.value.newUserEmail
-        )
-        .subscribe(
-          (data) => {
-            console.log('User registered', data);
-            this.closeRegisterPopup();
-            this.authService
-              .login(
-                this.registerForm.value.newUserUsername,
-                this.registerForm.value.newUserPassword
-              )
-              .subscribe(
-                (data) => {
-                  const userId = this.getUserIdFromToken(data.token);
-                  if (userId != null) {
-                    const userIdStr = userId.toString();
-                    console.log('Logged in!', data);
-                    this.cookieService.set('userId', userIdStr);
-                    this.cookieService.set('username', this.newUserUsername);
-                  } else {
-                    console.error('User ID not found in token');
-                  }
-                  this.router.navigate(['/landing']);
-                },
-                (error) => {
-                  console.error('Login error', error);
-                  this.loginFailed = true;
-                }
-              );
-          },
-          (error) => {
-            console.error('Error registering user', error);
-            this.registrationFailed = true;
-          }
-        );
-    } else {
-      // Handle form invalid case
-    }
-  }
-
-  createRegisterForm() {
-    this.registerForm = this.formBuilder.group({
-      newUserUsername: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(2),
-          Validators.maxLength(20),
-        ],
-      ],
-      newUserPassword: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(2),
-          Validators.maxLength(20),
-        ],
-      ],
-      newUserEmail: ['', [Validators.required, Validators.email]],
-    });
   }
 }

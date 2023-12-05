@@ -1,0 +1,13 @@
+<h2>My Recipes</h2>
+<mat-grid-list cols="2" rowHeight="100px">
+  <mat-grid-tile *ngFor="let recipe of recipes">
+    <mat-card class="card">
+      <mat-card-content>
+        <a [routerLink]="['/dashboard/variations', recipe.recipeId]">{{
+          recipe.title
+        }}</a>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+<button mat-button>New Recipe</button>

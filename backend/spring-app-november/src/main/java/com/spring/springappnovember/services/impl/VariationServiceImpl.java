@@ -3,6 +3,7 @@ package com.spring.springappnovember.services.impl;
 
 import com.spring.springappnovember.dtos.RecipeDto;
 import com.spring.springappnovember.dtos.VariationDto;
+import com.spring.springappnovember.entities.Commit;
 import com.spring.springappnovember.entities.Recipe;
 import com.spring.springappnovember.entities.Variation;
 import com.spring.springappnovember.repositories.VariationRepository;
@@ -11,6 +12,9 @@ import com.spring.springappnovember.services.VariationService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +30,7 @@ public class VariationServiceImpl implements VariationService {
 
     @Override
     public VariationDto createVariation(VariationDto variationDto) {
+    	
         Variation variation = new Variation();
         BeanUtils.copyProperties(variationDto, variation);
         variation = variationRepository.save(variation);
