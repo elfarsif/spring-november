@@ -14,7 +14,7 @@
         <button mat-button (click)="onCompare()">
           compare to last version
         </button>
-        <button mat-raised-button color="primary" (click)="promptCommit()">
+        <button mat-raised-button color="primary" (click)="openDialogCommit()">
           save changes
         </button>
       </div>
@@ -35,11 +35,6 @@
       </div>
     </mat-card-content>
   </mat-card>
-  <div *ngIf="showCommitModal">
-    commit message/changes implemented :
-    <input type="text" [(ngModel)]="commitMessage" />
-    <button (click)="hideCommitModal()">commit</button>
-  </div>
   <app-diff-checker
     #diffCheckerComponent
     (addCommitMessage)="promptCommit()"

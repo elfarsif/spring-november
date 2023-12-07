@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { CommitDialogComponent } from 'src/app/components/dialog/commit-dialog/commit-dialog.component';
 import { DiffCheckerComponent } from 'src/app/components/diff-checker/diff-checker.component';
 import { CommitDTO } from 'src/app/models/commit-dto.model';
 import { RecipeDTO } from 'src/app/models/recipe-dto.model';
@@ -49,7 +51,8 @@ export class RepositoryPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private cookieService: CookieService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -125,5 +128,14 @@ export class RepositoryPageComponent implements OnInit {
 
   onCompare() {
     this.sharedService.triggerButtonClicked();
+  }
+
+  openDialogCommit(): void {
+    const dialogRef = this.dialog.open(CommitDialogComponent);
+
+    // You can subscribe to events like after the dialog is closed
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

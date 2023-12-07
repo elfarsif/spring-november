@@ -30,6 +30,7 @@ import { RecipeCardListComponent } from './components/recipe-card-list/recipe-ca
 import { RecipeList3Component } from './components/recipe-list-3/recipe-list-3.component';
 import { RecipeHeaderComponent } from './components/recipe-header/recipe-header.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CommitDialogComponent } from './components/dialog/commit-dialog/commit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     RecipeCardListComponent,
     RecipeList3Component,
     RecipeHeaderComponent,
+    CommitDialogComponent,
   ],
   imports: [
     BrowserModule,

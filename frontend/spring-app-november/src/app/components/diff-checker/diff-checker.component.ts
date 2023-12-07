@@ -114,7 +114,7 @@ export class DiffCheckerComponent implements OnInit {
       .subscribe(
         (data) => {
           if (data.length > 1) {
-            this.lastCommit = data[data.length - 1];
+            this.lastCommit = data[data.length - 2];
 
             this.originalModel = Object.assign({}, this.originalModel, {
               code: this.lastCommit.instructions,
