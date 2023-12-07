@@ -4,17 +4,41 @@
       {{ recipeTitle }}
     </h1>
   </div>
-  <app-branch-dropdown
-    (variationChange)="onVariationSelected($event)"
-  ></app-branch-dropdown>
-  <div>
-    {{ latestCommit.message }} because {{ latestCommit.results }}
-    <button
-      mat-button
-      [routerLink]="['/commits', this.selectedVariation.variationId]"
-    >
-      Past commits
-    </button>
+  <mat-card>
+    <mat-card-content fxLayout="row" fxLayoutAlign="start">
+      <div fxFlex="80%">
+        <app-branch-dropdown (variationChange)="onVariationSelected($event)">
+        </app-branch-dropdown>
+      </div>
+      <div fxFlex="0 1 auto">
+        <button mat-button (click)="onCompare()">
+          compare to last version
+        </button>
+        <button mat-raised-button color="primary" (click)="promptCommit()">
+          save changes
+        </button>
+      </div>
+    </mat-card-content>
+
+    <mat-card-content fxLayout="row" fxLayoutAlign="start center end">
+      <div fxFlex="33%">Last Change : {{ latestCommit.message }}</div>
+      <div fxFlex="33%" fxLayoutAlign="center">
+        Reasons for Change : {{ latestCommit.results }}
+      </div>
+      <div fxFlex="33%" fxLayoutAlign="end">
+        <button
+          mat-button
+          [routerLink]="['/commits', this.selectedVariation.variationId]"
+        >
+          Past Changes
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <div *ngIf="showCommitModal">
+    commit message/changes implemented :
+    <input type="text" [(ngModel)]="commitMessage" />
+    <button (click)="hideCommitModal()">commit</button>
   </div>
   <app-diff-checker
     #diffCheckerComponent
@@ -22,11 +46,4 @@
     [selectedVariationInstructions]="selectedVariationInstructions"
     [text1]="selectedVariation"
   ></app-diff-checker>
-
-  <div *ngIf="showCommitModal">
-    commit message/changes implemented :
-    <input type="text" [(ngModel)]="commitMessage" />
-    <button (click)="hideCommitModal()">commit</button>
-  </div>
 </div>
-<button>Delete Branch</button>

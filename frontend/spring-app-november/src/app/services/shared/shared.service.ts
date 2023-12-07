@@ -17,7 +17,14 @@ export class SharedService {
   private latestCommitSubject = new BehaviorSubject<CommitDTO | null>(null);
   latestCommit$: Observable<CommitDTO | null> =
     this.latestCommitSubject.asObservable();
+  //button clicked for text compare
+  private buttonOnCompareClickedSubject = new BehaviorSubject<void>(undefined);
+  buttonOnCompareClicked$: Observable<void> =
+    this.buttonOnCompareClickedSubject.asObservable();
 
+  triggerButtonClicked(): void {
+    this.buttonOnCompareClickedSubject.next();
+  }
   setSelectedVariation(variation: any): void {
     this.selectedVariationSubject.next(variation);
   }

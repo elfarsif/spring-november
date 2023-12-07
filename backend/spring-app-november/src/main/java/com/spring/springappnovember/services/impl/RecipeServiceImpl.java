@@ -1,8 +1,10 @@
 package com.spring.springappnovember.services.impl;
 
 import com.spring.springappnovember.dtos.RecipeDto;
+import com.spring.springappnovember.entities.Commit;
 import com.spring.springappnovember.entities.Recipe;
 import com.spring.springappnovember.entities.Variation;
+import com.spring.springappnovember.repositories.CommitRepository;
 import com.spring.springappnovember.repositories.RecipeRepository;
 import com.spring.springappnovember.repositories.VariationRepository;
 import com.spring.springappnovember.services.RecipeService;
@@ -20,12 +22,14 @@ public class RecipeServiceImpl implements RecipeService {
 
     private final RecipeRepository recipeRepository;
     private final VariationRepository variationRepository;
+    private final CommitRepository commitRepository;
     
 
     @Autowired
-    public RecipeServiceImpl(RecipeRepository recipeRepository, VariationRepository variationRepository) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository, VariationRepository variationRepository, CommitRepository commitRepository) {
         this.recipeRepository = recipeRepository;
 		this.variationRepository = variationRepository;
+		this.commitRepository = commitRepository;
     }
     
     
@@ -58,7 +62,16 @@ public class RecipeServiceImpl implements RecipeService {
     	variation.setRecipe(recipe);
         variation.setIsMain(true);
         Variation variationReturned=variationRepository.save(variation);
-        
+        //add new commit when u create a variation
+        Commit commit=new Commit();
+        commit.setInstructions("Add new Recipe Here");
+        commit.setMessage("");
+        commit.setResults("");
+        commit.setVariationId(variationReturned.getVariationId());
+        commit.setTimestamp(null);
+        Commit commitReturned=new Commit();
+        commitReturned=commitRepository.save(commit);
+        System.out.println("NEW COMMIT RETURNed"+commitReturned);
         
         System.out.println("New variation created with recipe"+variationReturned);
         

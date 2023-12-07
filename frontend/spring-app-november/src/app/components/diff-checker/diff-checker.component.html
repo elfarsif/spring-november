@@ -1,67 +1,42 @@
-<div class="container-fluid container-diff">
-  <div *ngIf="isCompared" class="row">
-    <div class="col-md-12">
+<div>
+  Recipe Results:
+  <input [(ngModel)]="newCommit.results" />
+  <div *ngIf="isCompared">
+    <div>
       <form class="form-inline" role="form">
-        <div class="form-check mb-2 mr-sm-2">
-          <label class="form-check-label">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              (change)="onChangeInline($event)"
-            />
+        <div>
+          <label>
+            <input type="checkbox" (change)="onChangeInline($event)" />
             Inline Diff
           </label>
         </div>
       </form>
     </div>
   </div>
-  <div *ngIf="isCompared" class="row">
-    <div class="col-md-12 editor">
-      <ngx-monaco-diff-editor
-        id="diffeditor"
-        [options]="diffOptions"
-        [originalModel]="originalModel"
-        [modifiedModel]="modifiedModel"
-      ></ngx-monaco-diff-editor>
-    </div>
-  </div>
-  <div class="row">
-    <!-- <div class="col-md-6">
-      <div class="input-title">
-        <label>Original Text</label>
-      </div>
-      <ngx-monaco-editor
-        id="editor1"
-        [options]="inputOptions"
-        [(ngModel)]="text1"
-      ></ngx-monaco-editor>
-    </div> -->
-    <div class="col-md-6">
-      <div class="input-title">
+
+  <div *ngIf="!isCompared">
+    <div>
+      <div>
         <label>Recipe</label>
       </div>
       <ngx-monaco-editor
         id="editor2"
         [options]="inputOptions"
         [(ngModel)]="newCommit!.instructions"
+        style="height: 60vh"
       ></ngx-monaco-editor>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12" style="text-align: center">
-      <button type="button" class="btn btn-primary" (click)="onCompare()">
-        compare to last version
-      </button>
+
+  <div *ngIf="isCompared">
+    <div>
+      <ngx-monaco-diff-editor
+        id="diffeditor"
+        [options]="diffOptions"
+        [originalModel]="originalModel"
+        [modifiedModel]="modifiedModel"
+        style="height: 50vh"
+      ></ngx-monaco-diff-editor>
     </div>
   </div>
-
-  Recipe Results:
-  <textarea [(ngModel)]="newCommit.results" cols="30" rows="3">
-overcooked too sweet</textarea
-  >
 </div>
-<br />
-<br />
-<button (click)="promptCommit()">commit/save changes</button>
-<br />
-<br />

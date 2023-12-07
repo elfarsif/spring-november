@@ -1,6 +1,6 @@
-<div class="modal-content">
+<!-- <button (click)="close()">x</button> -->
+<div>
   <p>Enter New Recipe Title:</p>
-  <input type="text" [(ngModel)]="newRecipeTitle" />
-  <button (click)="submitNewRecipe()">Submit</button>
+  <input matInput type="text" [(ngModel)]="newRecipeTitle" />
+  <button mat-button (click)="submitNewRecipe()">Submit</button>
 </div>
-<button mat-button (click)="close()">Close</button>

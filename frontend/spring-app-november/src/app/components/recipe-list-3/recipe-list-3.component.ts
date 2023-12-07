@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { RecipeDTO } from 'src/app/models/recipe-dto.model';
 import { RecipeService } from 'src/app/services/recipe/recipe.service';
+import { NewRecipeDialogComponent } from '../new-recipe-dialog/new-recipe-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-recipe-list-3',
@@ -9,7 +11,10 @@ import { RecipeService } from 'src/app/services/recipe/recipe.service';
 })
 export class RecipeList3Component {
   recipes!: RecipeDTO[];
-  constructor(private recipeService: RecipeService) {}
+  constructor(
+    private recipeService: RecipeService,
+    private dialog: MatDialog
+  ) {}
   ngOnInit() {
     this.loadRecipes();
   }
@@ -21,5 +26,12 @@ export class RecipeList3Component {
       },
       (error) => {}
     );
+  }
+  openPopup(): void {
+    const dialogRef = this.dialog.open(NewRecipeDialogComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

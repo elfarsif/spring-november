@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { DiffCheckerComponent } from 'src/app/components/diff-checker/diff-checker.component';
 import { CommitDTO } from 'src/app/models/commit-dto.model';
+import { RecipeDTO } from 'src/app/models/recipe-dto.model';
 import { VariationDTO } from 'src/app/models/variation-dto.model';
 import { CommitService } from 'src/app/services/commit/commit.service';
 import { SelectedVariationService } from 'src/app/services/components/selected-variation/selected-variation.service';
@@ -18,7 +19,14 @@ export class RepositoryPageComponent implements OnInit {
   variations!: VariationDTO[];
   mainVariation!: VariationDTO;
   recipeId!: number;
-  selectedVariation!: VariationDTO;
+  recipeDto!: RecipeDTO;
+  selectedVariation: VariationDTO = {
+    variationId: 0,
+    variationTitle: '',
+    instructions: '',
+    recipe: this.recipeDto,
+    isMain: false,
+  };
   selectedVariationInstructions!: string;
   selectedPulledVariation!: VariationDTO;
   showCommitModal: boolean = false;
@@ -113,5 +121,9 @@ export class RepositoryPageComponent implements OnInit {
           console.log(error);
         }
       );
+  }
+
+  onCompare() {
+    this.sharedService.triggerButtonClicked();
   }
 }

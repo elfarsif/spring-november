@@ -28,6 +28,9 @@ import { AssignedPageComponent } from './layouts/assigned-page/assigned-page.com
 import { ContentPageComponent } from './layouts/content-page/content-page.component';
 import { RecipeCardListComponent } from './components/recipe-card-list/recipe-card-list.component';
 import { RecipeList3Component } from './components/recipe-list-3/recipe-list-3.component';
+import { RecipeHeaderComponent } from './components/recipe-header/recipe-header.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +53,7 @@ import { RecipeList3Component } from './components/recipe-list-3/recipe-list-3.c
     ContentPageComponent,
     RecipeCardListComponent,
     RecipeList3Component,
+    RecipeHeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +65,7 @@ import { RecipeList3Component } from './components/recipe-list-3/recipe-list-3.c
     NoopAnimationsModule,
     MatDialogModule,
     MaterialModule,
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

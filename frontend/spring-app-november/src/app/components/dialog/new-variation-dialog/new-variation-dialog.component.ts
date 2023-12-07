@@ -34,12 +34,8 @@ export class NewVariationDialogComponent {
     this.dialogRef.close();
   }
 
-  addBranch() {
-    console.log('adding');
-    const userId = +this.cookieService.get('userId');
-  }
-
   onSubmit() {
+    console.log('adding onSubmit()');
     const userId = +this.cookieService.get('userId');
     this.variationService
       .postNewVariation(

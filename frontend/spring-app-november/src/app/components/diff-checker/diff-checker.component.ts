@@ -5,7 +5,9 @@ import {
   OnInit,
   Output,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { DiffEditorModel } from 'ngx-monaco-editor-v2';
 import { CommitDTO } from 'src/app/models/commit-dto.model';
 import { VariationDTO } from 'src/app/models/variation-dto.model';
@@ -73,9 +75,13 @@ export class DiffCheckerComponent implements OnInit {
 
   constructor(
     private commitService: CommitService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private router: Router
   ) {}
   ngOnInit(): void {
+    this.sharedService.buttonOnCompareClicked$.subscribe(() => {
+      this.onCompare();
+    });
     this.sharedService.selectedVariation$.subscribe((variation) => {
       this.selectedVariation2 = variation;
     });
@@ -108,7 +114,7 @@ export class DiffCheckerComponent implements OnInit {
       .subscribe(
         (data) => {
           if (data.length > 1) {
-            this.lastCommit = data[data.length - 2];
+            this.lastCommit = data[data.length - 1];
 
             this.originalModel = Object.assign({}, this.originalModel, {
               code: this.lastCommit.instructions,
@@ -137,6 +143,7 @@ export class DiffCheckerComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log(data);
+          this.refreshCurrentRoute();
         },
         (error) => {
           console.error(error);
@@ -145,5 +152,12 @@ export class DiffCheckerComponent implements OnInit {
   }
   promptCommit() {
     this.addCommitMessage.emit();
+  }
+
+  private refreshCurrentRoute() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
 }

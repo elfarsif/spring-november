@@ -6,6 +6,7 @@ import com.spring.springappnovember.dtos.VariationDto;
 import com.spring.springappnovember.entities.Commit;
 import com.spring.springappnovember.entities.Recipe;
 import com.spring.springappnovember.entities.Variation;
+import com.spring.springappnovember.repositories.CommitRepository;
 import com.spring.springappnovember.repositories.VariationRepository;
 import com.spring.springappnovember.services.VariationService;
 
@@ -22,19 +23,33 @@ import java.util.stream.Collectors;
 public class VariationServiceImpl implements VariationService {
 
     private final VariationRepository variationRepository;
+    private final CommitRepository commitRepository;
 
     @Autowired
-    public VariationServiceImpl(VariationRepository variationRepository) {
+    public VariationServiceImpl(VariationRepository variationRepository, CommitRepository commitRepository) {
         this.variationRepository = variationRepository;
+		this.commitRepository = commitRepository;
     }
 
     @Override
     public VariationDto createVariation(VariationDto variationDto) {
     	
+    	
         Variation variation = new Variation();
         BeanUtils.copyProperties(variationDto, variation);
         variation = variationRepository.save(variation);
         BeanUtils.copyProperties(variation, variationDto);
+        
+        Commit commit=new Commit();
+        commit.setInstructions("Add new Recipe Here");
+        commit.setMessage("");
+        commit.setResults("");
+        commit.setVariationId(variation.getVariationId());
+        commit.setTimestamp(null);
+        Commit commitReturned=new Commit();
+        commitReturned=commitRepository.save(commit);
+        System.out.println("NEW COMMIT RETURNed"+commitReturned);
+        
         return variationDto;
     }
 

@@ -74,22 +74,6 @@ export class BranchDropdownComponent {
     this.addBranchInput = !this.addBranchInput;
   }
 
-  addBranch() {
-    console.log('adding');
-    const userId = +this.cookieService.get('userId');
-    this.variationService
-      .postNewVariation(this.newBranchName, this.recipeId, userId, false)
-      .subscribe(
-        (variation) => {
-          console.log('Variation created:', variation);
-          this.addBranchInput = false;
-        },
-        (error) => {
-          console.error('Error creating variation:', error);
-        }
-      );
-  }
-
   openDialog(): void {
     const dialogRef = this.dialog.open(NewVariationDialogComponent);
 
