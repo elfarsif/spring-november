@@ -4,7 +4,7 @@ Welcome to Recipe Version Control, a web application designed to help you track 
 
 ## Work in Progress
 
-While the application is functional, it's important to note that Recipe Version Control is still a work in progress. Some features are yet to be implemented, and there may be bugs in the current version. But I still hope its fun to around with as a concept :)
+While the application is functional, it's important to note that Recipe Version Control is still a work in progress. Some features are yet to be implemented, and there may be bugs in the current version. But I still hope its fun to try in out:), also the code is kinda messy currently as I said, work in progress haha
 
 ## Table of Contents
 
