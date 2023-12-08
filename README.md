@@ -6,16 +6,11 @@ This repository contains a web application built with Spring Boot for the backen
 
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
+- [Structure](#structure)
 - [Usage](#usage)
 - [Features](#features)
 - [Contributing](#contributing)
 - [License](#license)
-
-## Installation
-
-1. Clone the repository: `git clone https://github.com/your-username/your-repo.git`
-2. Navigate to the project directory: `cd your-repo`
-3. Install dependencies: `npm install`
 
 
 ## Prerequisites
@@ -28,7 +23,11 @@ Before you start, ensure you have the following software installed:
 - [Maven](https://maven.apache.org/) (v3.8.4)
 - [MySQL](https://www.mysql.com/) (v8.0)
 
-## Installation Steps
+## Installation
+
+1. Clone the repository: `https://github.com/elfarsif/spring-november.git`
+2. Navigate to the project directory: `cd spring-november`
+3. Install dependencies: `npm install`
 
 ### Frontend (Angular)
 
@@ -79,12 +78,12 @@ Before you start, ensure you have the following software installed:
 1. Open a MySQL client and execute the provided SQL script to create the necessary database and tables:
 
     ```sql
-    -- Copy and paste the SQL script here
+    -- The DDL can be found under /backend/spring-app-november/src/main/resources/spring_november.sql
     ```
 
 2. Insert sample data into the tables by executing the sample data insertion queries in the script.
 
-## Application Structure
+## Structure
 
 The application consists of the following components:
 
