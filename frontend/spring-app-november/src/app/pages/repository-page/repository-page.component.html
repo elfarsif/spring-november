@@ -28,7 +28,10 @@
       <div fxFlex="33%" fxLayoutAlign="end">
         <button
           mat-button
-          [routerLink]="['/commits', this.selectedVariation.variationId]"
+          [routerLink]="[
+            '/dashboard/commits',
+            this.selectedVariation.variationId
+          ]"
         >
           Past Changes
         </button>

@@ -9,7 +9,8 @@ import { RecipeDTO } from 'src/app/models/recipe-dto.model';
   providedIn: 'root',
 })
 export class CommitService {
-  private apiUrl = 'http://localhost:5000/commits';
+  private apiUrl =
+    'http://spring-6-env.eba-yauywiv3.us-east-2.elasticbeanstalk.com/commits';
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 

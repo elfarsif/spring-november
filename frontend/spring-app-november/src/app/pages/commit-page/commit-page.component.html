@@ -1,6 +1,17 @@
-<ul>
-  <li *ngFor="let commit of commits">
-    {{ commit.message }}
-  </li>
-</ul>
-{{ variationId }}
+<mat-accordion *ngFor="let commit of commits">
+  <mat-expansion-panel (opened)="onPanelOpened(commit)">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Changes : {{ commit.item.message }} </mat-panel-title>
+      <mat-panel-description>
+        Reasons For Changes : {{ commit.item.results }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <ngx-monaco-diff-editor
+      id="diffeditor"
+      [options]="diffOptions"
+      [originalModel]="originalModel"
+      [modifiedModel]="modifiedModel"
+      style="height: 50vh"
+    ></ngx-monaco-diff-editor>
+  </mat-expansion-panel>
+</mat-accordion>

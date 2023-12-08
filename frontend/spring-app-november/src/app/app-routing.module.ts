@@ -36,11 +36,13 @@ const routes: Routes = [
       { path: 'content-page', component: ContentPageComponent },
       { path: 'landing', component: LandingPageComponent },
       { path: 'variations/:id', component: RepositoryPageComponent },
+      { path: 'commits/:id', component: CommitPageComponent },
       { path: '', redirectTo: 'assigned-page', pathMatch: 'full' },
     ],
 
     canActivate: [AuthGuard],
   },
+  { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({

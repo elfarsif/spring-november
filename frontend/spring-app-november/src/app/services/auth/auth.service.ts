@@ -9,7 +9,8 @@ import { User } from 'src/app/models/user-dto.model';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5000';
+  private apiUrl =
+    'http://spring-6-env.eba-yauywiv3.us-east-2.elasticbeanstalk.com';
   constructor(
     private router: Router,
     private cookieService: CookieService,
