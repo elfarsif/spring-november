@@ -14,7 +14,7 @@ While the application is functional, it's important to note that Recipe Version 
 - [Structure](#structure)
 - [Demo](#demo)
       - [Features](#features)
-      - [Progress](#progress)
+- [Progress](#progress)
   
 
 ## Purpose
@@ -118,7 +118,7 @@ Application is hosted at [recipe version control app](http://recipeelfarsi.s3-we
 - **Recipe Management:** Create, view, and update recipes with multiple variations.
 - **Commit History:** Track changes to recipe variations over time.
 
-### Progress
+## Progress
 
 - **Upcoming Features:**
   - User profile page with personal recipe statistics.
