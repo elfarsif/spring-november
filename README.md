@@ -1,7 +1,29 @@
 # Recipe Version Control
 
-This repository contains a web application built with Spring Boot for the backend, Angular for the frontend, and MySQL for the database. The application allows users to manage recipes and their variations through a user-friendly interface.
+Welcome to Recipe Version Control, a web application designed to help you track changes made to recipes over time. Whether you're experimenting with new ingredients, adjusting cooking times, or refining instructions, this app provides a version-controlled environment for your culinary creations.
 
+## Purpose
+
+The primary goal of this application is to offer users a simple and intuitive way to manage recipe variations and track modifications through commits. Each commit captures specific changes made to a recipe, providing a comprehensive version history.
+
+## Features (Work in Progress)
+
+- **User Authentication:** Securely register, log in, and manage your account.
+- **Recipe Management:** Create, view, and update recipes with multiple variations.
+- **Commit History:** Track changes to recipe variations over time.
+
+## Work in Progress
+
+While the application is functional, it's important to note that Recipe Version Control is still a work in progress. Some features are yet to be implemented, and there may be bugs in the current version. Here are some areas we're actively working on:
+
+- **Upcoming Features:**
+  - User profile page with personal recipe statistics.
+  - Enhanced search and filtering options for recipes.
+  - Integration with third-party APIs for additional recipe data.
+
+- **Known Issues:**
+  - Issue with commit timestamps not displaying correctly.
+  - Occasional frontend updates not reflecting backend changes.
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
