@@ -7,10 +7,8 @@ This repository contains a web application built with Spring Boot for the backen
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Structure](#structure)
-- [Usage](#usage)
-- [Features](#features)
-- [Contributing](#contributing)
-- [License](#license)
+- [Demo](#demo)
+      - [Features](#features) 
 
 
 ## Prerequisites
@@ -99,14 +97,11 @@ The application consists of the following components:
   - Database name: `spring_november`
   - Tables: `users`, `recipes`, `variations`, `commits`
 
-## Sample Data
+## Demo
 
-The SQL script includes sample data to get you started. Feel free to explore the application with the provided sample recipes, variations, and commits.
+Application is hosted at 
 
-## Notes
-
-- Make sure to configure the database connection properties in the `application.properties` file in the `backend` directory.
-- Customize the application based on your requirements and extend its functionality.
+### Features
 
 Enjoy exploring and developing with the Spring App November!
 
