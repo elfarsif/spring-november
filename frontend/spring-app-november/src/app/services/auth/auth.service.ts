@@ -15,13 +15,14 @@ export class AuthService {
   user: User = {
     id: 0,
     username: '',
-    email: '',
+    email: 'some email',
     password: '',
   };
   constructor(
     private router: Router,
     private cookieService: CookieService,
-    private http: HttpClient
+    private http: HttpClient,
+    private sharedService: SharedService
   ) {}
 
   login(username: string, password: string) {
@@ -30,6 +31,9 @@ export class AuthService {
       .pipe(
         map((response) => {
           this.cookieService.set('token', response.token);
+          this.user.username = username;
+          this.user.password = password;
+          this.sharedService.setUser(this.user);
           return response;
         }),
         catchError((error) => {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedService } from 'src/app/services/shared/shared.service';
 
 @Component({
@@ -7,19 +8,32 @@ import { SharedService } from 'src/app/services/shared/shared.service';
   styleUrls: ['./account-setting-page.component.css'],
 })
 export class AccountSettingPageComponent {
-  username: string = '';
-  password: string = '';
-  email: string = '';
+  accountForm!: FormGroup;
 
-  constructor(private sharedService: SharedService) {}
+  constructor(private sharedService: SharedService, private fb: FormBuilder) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.sharedService.user$.subscribe(
+      (user) => {
+        if (user) {
+          this.accountForm = this.fb.group({
+            username: [user.username, Validators.required],
+            password: [user.password, Validators.required],
+            email: [user.email, [Validators.required, Validators.email]],
+          });
+        }
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
 
   saveChanges() {
-    // Implement your save changes logic here
-    console.log('Save changes clicked');
-    console.log('Username:', this.username);
-    console.log('Password:', this.password);
-    console.log('Email:', this.email);
+    if (this.accountForm.valid) {
+      console.log('Save changes clicked');
+    } else {
+      console.log('Form is invalid');
+    }
   }
 }
