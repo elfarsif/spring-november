@@ -25,7 +25,7 @@ export class SharedService {
   triggerButtonClicked(): void {
     this.buttonOnCompareClickedSubject.next();
   }
-  setSelectedVariation(variation: any): void {
+  setSelectedVariation(variation: VariationDTO): void {
     this.selectedVariationSubject.next(variation);
   }
   setLatestCommit(commit: CommitDTO | null): void {

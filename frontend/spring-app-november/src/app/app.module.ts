@@ -31,6 +31,8 @@ import { RecipeList3Component } from './components/recipe-list-3/recipe-list-3.c
 import { RecipeHeaderComponent } from './components/recipe-header/recipe-header.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CommitDialogComponent } from './components/dialog/commit-dialog/commit-dialog.component';
+import { DashboardPageLayoutComponent } from './components/dashboard-page-layout/dashboard-page-layout.component';
+import { AccountSettingPageComponent } from './pages/account-setting-page/account-setting-page.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { CommitDialogComponent } from './components/dialog/commit-dialog/commit-
     RecipeList3Component,
     RecipeHeaderComponent,
     CommitDialogComponent,
+    DashboardPageLayoutComponent,
+    AccountSettingPageComponent,
   ],
   imports: [
     BrowserModule,

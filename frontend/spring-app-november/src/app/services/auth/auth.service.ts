@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { User } from 'src/app/models/user-dto.model';
+import { SharedService } from '../shared/shared.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,12 @@ import { User } from 'src/app/models/user-dto.model';
 export class AuthService {
   private apiUrl =
     'http://spring-6-env.eba-yauywiv3.us-east-2.elasticbeanstalk.com';
+  user: User = {
+    id: 0,
+    username: '',
+    email: '',
+    password: '',
+  };
   constructor(
     private router: Router,
     private cookieService: CookieService,

@@ -10,6 +10,7 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { LoggedInLayoutComponent } from './layouts/logged-in-layout/logged-in-layout.component';
 import { AssignedPageComponent } from './layouts/assigned-page/assigned-page.component';
 import { ContentPageComponent } from './layouts/content-page/content-page.component';
+import { AccountSettingPageComponent } from './pages/account-setting-page/account-setting-page.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -37,6 +38,7 @@ const routes: Routes = [
       { path: 'landing', component: LandingPageComponent },
       { path: 'variations/:id', component: RepositoryPageComponent },
       { path: 'commits/:id', component: CommitPageComponent },
+      { path: 'account_settings', component: AccountSettingPageComponent },
       { path: '', redirectTo: 'assigned-page', pathMatch: 'full' },
     ],
 
