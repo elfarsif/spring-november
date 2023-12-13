@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -15,7 +15,7 @@ export class AuthService {
   user: User = {
     id: 0,
     username: '',
-    email: 'some email',
+    email: 'some@gmail.com',
     password: '',
   };
   constructor(
@@ -60,5 +60,32 @@ export class AuthService {
     };
 
     return this.http.post<any>(`${this.apiUrl}/users/register`, payload);
+  }
+
+  updateUser(user: User) {
+    const token = this.cookieService.get('token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    const payload: User = user;
+    return this.http.put<User>(
+      `${this.apiUrl}/users/${this.getUserIdFromToken(token)}`,
+      payload,
+      { headers }
+    );
+  }
+
+  getUserIdFromToken(token: string): number | null {
+    try {
+      const payload = token.split('.')[1]; // Get the payload part
+      const decodedPayload = atob(payload); // Decode Base64
+      const payloadObject = JSON.parse(decodedPayload);
+      return payloadObject.userId; // Adjust depending on how the claim is named
+    } catch (error) {
+      console.error('Error parsing token', error);
+      return null;
+    }
   }
 }
