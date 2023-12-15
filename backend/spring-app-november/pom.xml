@@ -28,6 +28,39 @@
 		    <artifactId>java-jwt</artifactId>
 		    <version>3.8.1</version>
 		</dependency>
+		<!-- Spring Boot Starter dependencies -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- Mockito dependencies -->
+    <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>3.12.4</version> <!-- Use the latest version available -->
+        <scope>test</scope>
+    </dependency>
+
+    <!-- JUnit dependencies -->
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.13.2</version> <!-- Use the latest version available -->
+        <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.jacoco</groupId>
+        <artifactId>org.jacoco.core</artifactId>
+        <version>0.8.7</version>
+    </dependency>
+   
 		        
 		
 		<dependency>
@@ -77,6 +110,8 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			 <!-- Add JaCoCo plugin -->
+			 
 		</plugins>
 	</build>
 

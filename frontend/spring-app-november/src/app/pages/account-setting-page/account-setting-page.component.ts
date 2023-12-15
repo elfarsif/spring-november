@@ -61,7 +61,6 @@ export class AccountSettingPageComponent {
         (response) => {
           console.log(response);
           this.refreshCurrentRoute();
-          this.authService.logout();
         },
         (error) => {
           console.error(error);
